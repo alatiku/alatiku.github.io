@@ -1,8 +1,42 @@
 # My Data Science Journey
 
-Welcome to my portfolio website! My name is Aliyu Atiku Mustapha, and I’m a
-hard-working professional who is now pursuing a career in the fascinating world
-of data science.
+
+<style>
+/* CSS Code */
+
+/* Reset default browser styles */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Footer styling */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Main Content */
+#content {
+  padding: 20px;
+}
+
+</style>
+
+## My Data Science Journey
+
+Welcome to my portfolio website! My name is Aliyu Atiku Mustapha, and I'm a
+hard-working professional who is now pursuing a career in the fascinating
+world of data science.
 
 My interest in data science was sparked during my time working in the commodity
 import/export industry, where I saw firsthand how important data is to
@@ -25,15 +59,18 @@ true potential of machine learning techniques.
 As I embark on this exhilarating career transition, my main objective is to
 apply my growing skills to data from the real world. I am motivated to use
 cutting-edge data science tools to uncover insightful information, identify
-trends, and solve complex problems. I invite you to explore my portfolio and
-join me on this exciting journey into the dynamic field of data science.
+trends, and solve complex problems.
+I invite you to explore my portfolio and join me on this exciting journey into
+the dynamic field of data science.
 
 Thank you for visiting!
 
 Best regards.
 
+
+
 <footer>
   &copy; 2023 All rights reserved.
   
-  [LinkedIn](https://www.linkedin.com/in/aliyu-atiku) | [GitHub](https://github.com/alatiku)
+  [LinkedIn](https://www.linkedin.com/in/aliyu-atiku) | [GitHub](https://github.com/sirjoka)
 </footer>
