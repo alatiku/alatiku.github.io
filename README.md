@@ -1,44 +1,7 @@
+
+
 # My Data Science Journey
 
-
-<style>
-/* CSS Code */
-
-/* Reset default browser styles */
-body {
-  margin: 0;
-  padding: 0;
-}
-
-/* Footer styling */
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-
-/* Body styling */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
-}
-
-/* Main Content */
-#content {
-  padding: 20px;
-}
-
-</style>
-
-## My Data Science Journey
-
-<p align="center">
-[![SQL](https://img.shields.io/badge/-SQL-lightgrey)]
-[![R](https://img.shields.io/badge/-R-9cf)]
-[![Python](https://img.shields.io/badge/-Python-blueviolet)]
-</p>
 Welcome to my portfolio website! My name is Aliyu Atiku Mustapha, and I'm a
 hard-working professional who is now pursuing a career in the fascinating
 world of data science.
@@ -73,6 +36,11 @@ Thank you for visiting!
 Best regards.
 
 
+<p align="center">
+[![SQL](https://img.shields.io/badge/-SQL-lightgrey)]
+[![R](https://img.shields.io/badge/-R-9cf)]
+[![Python](https://img.shields.io/badge/-Python-blueviolet)]
+</p>
 
 <footer>
   &copy; 2023 All rights reserved.
