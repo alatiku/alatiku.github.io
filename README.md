@@ -79,3 +79,4 @@ Best regards.
   &copy; 2023 All rights reserved.
   [LinkedIn](https://www.linkedin.com/in/aliyu-atiku) | [Kaggle](https://www.kaggle.com/alatiku)
 </footer>
+</p>
