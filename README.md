@@ -1,8 +1,9 @@
-<h1 align="center"> My Data Science Journey<br>
+<h1 align="center"> My Data Science Journey<br></h1>
+
 [![SQL](https://img.shields.io/badge/-SQL-lightgrey)]
 [![R](https://img.shields.io/badge/-R-9cf)]
 [![Python](https://img.shields.io/badge/-Python-blueviolet)]
-</h1>
+
 
 
 Welcome to my portfolio website! My name is Aliyu Atiku Mustapha, and I'm a
@@ -40,7 +41,7 @@ Best regards.
 
 
 
-<footer align="center">
+<footer>
 &copy; 2023 All rights reserved.
 [LinkedIn](https://www.linkedin.com/in/aliyu-atiku)       [Kaggle](https://www.kaggle.com/alatiku)
 </footer>
