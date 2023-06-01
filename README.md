@@ -1,6 +1,5 @@
+<h1 align="center"> My Data Science Journey</h1>
 
-
-# My Data Science Journey
 
 Welcome to my portfolio website! My name is Aliyu Atiku Mustapha, and I'm a
 hard-working professional who is now pursuing a career in the fascinating
@@ -36,14 +35,10 @@ Thank you for visiting!
 Best regards.
 
 
-<p align="center">
 [![SQL](https://img.shields.io/badge/-SQL-lightgrey)]
 [![R](https://img.shields.io/badge/-R-9cf)]
 [![Python](https://img.shields.io/badge/-Python-blueviolet)]
-</p>
 
-<p align="center">
 &copy; 2023 All rights reserved.
 [LinkedIn](https://www.linkedin.com/in/aliyu-atiku)       [Kaggle](https://www.kaggle.com/alatiku)
-</p>
 
