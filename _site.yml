@@ -1,0 +1,10 @@
+navbar: 
+  title: Home
+  left:
+  - text: R Projects
+    href: R.html
+  - text: Python Projects
+    href: Python.html
+output:
+  html_document:
+    theme: cerulean
