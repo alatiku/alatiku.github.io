@@ -1,0 +1,307 @@
+---
+title: "Sentiment Analysis on Amazon Fine Food Reviews Data"
+author: "Aliyu Atiku Mustapha"
+date: "2023-08-04"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 2
+    code_folding: hide
+---
+# Analysis Objectives
+
+The purpose of this analysis is to answer 5 business questions using the Amazon
+Fine Food Reviews Data.
+
+1. What is the overall sentiment distribution of the reviews?
+
+2. How does the sentiment change over time?
+
+3. Are there any specific products that consistently receive positive or
+negative reviews?
+
+4. Do certain review lengths tend to have more positive or negative sentiment?
+
+5. How does the sentiment differ between different user ratings (e.g., 1-star, 5-star)?
+
+# The Data
+
+## Amazon Fine Food Reviews Data
+
+The dataset consists of reviews of fine foods from amazon. The data spans a
+period of more than 10 years, including all 568,454 reviews up to October 2012.
+Reviews include product and user information, ratings, and a plain text review.
+
+The dataset is available on [Kaggle](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews?resource=download). The data has the following columns and their descriptions:
+
+| Column Name | Column Description 
+|--------- |--------- 
+| Id    |  A unique identifier for each review.
+| ProductId    | The unique identifier of the product being reviewed
+| UserId    | The unique identifier of the user who wrote the review
+| ProfileName    | The profile name of the user who wrote the review
+| HelpfulnessNumerator    | The number of users who found the review helpful
+| HelpfulnessDenominator    | The total number of users who voted on the review's helpfulness
+| Score    | The rating given by the user (ranging from 1 to 5, where 5 is the highest)
+| Time    | The timestamp of when the review was posted
+| Summary    | A brief summary of the review's content
+| Text    |  The main body of the review, containing the detailed comments and opinions
+
+```{r setup, warning=FALSE, message=FALSE}
+# Load tidyverse package
+library(tidyverse)
+# Load tidytext package
+library(tidytext)
+# Load DT package for table display
+library(DT)
+# Load TM package
+library(tm)
+# Load textclean package
+library(textclean)
+# Load textstem package
+library(textstem)
+# Load DT package
+library(DT)
+# Load plotly package
+library(plotly)
+# Load knitr package
+library(knitr)
+# Set constant size for plots
+knitr::opts_chunk$set(fig.width = 10, fig.height = 6)
+```
+
+
+## Data Loading
+```{r, read_files, message=FALSE, warning=FALSE}
+amzn_data <- read_csv("E:/My Data Science Portfolio/Datasets/Reviews.csv")
+# Number of total rows in data
+cat("The review dataset has",nrow(amzn_data), "rows.")
+# Display the first 500 rows of imported data
+datatable(
+  amzn_data[1:500,],
+  options = list(pageLength = 20),
+  caption = "The first 500 rows of loaded data.",
+  fillContainer = T)
+```
+
+## Data Properties
+
+To understand the data composition, the class of each variable together with
+the number and proportion of missing values for each variable will provide a 
+deeper insight to the data structure and how it could be useful for analysis.
+
+```{r data_str, message=FALSE, warning=FALSE}
+# Check for class of each variable
+class_table <- sapply(amzn_data, class)
+class_table <- data.frame(
+  Variable = names(class_table),
+  Class = as.character(class_table),
+  stringsAsFactors = FALSE)
+# Check for the proportion of missing values in full data
+x <- data.frame(miss = colSums(is.na(amzn_data)), 
+             prop = round((colSums(is.na(amzn_data)) / nrow(amzn_data)) * 100, 
+                           2))
+properties <- cbind(class_table,
+                    Values_missing = x[, 1],
+                    Proportion_missing = x[, 2])
+# Display the properties of the data
+datatable(
+  properties,
+  options = list(pageLength = 10),
+  caption = "Table displaying the properties of the data.",
+  fillContainer = T)
+```
+
+Note: Data has no missing values.
+
+## Data Cleaning and Processing
+
+Next, we'll clean and reformat the data by creating new variables and dropping 
+those not needed, especially those with high proportion of missing values.
+
+```{r clean_data, warning=FALSE, message=FALSE}
+amzn_cleaned <- amzn_data %>%
+# Step 1:Convert Time to POSIXct format and remove the day and time parts
+  mutate(Time = as.POSIXct(Time, origin = "1970-01-01"),
+    Time = format(Time, "%Y-%m")
+    ) %>%
+# Step 2: Rename Time column to Year_Month
+  rename(Year_Month = Time) %>%
+# Step 3: Remove columns that do not provide any valuable information for sentiment classification
+ select(-Id, -ProfileName, -HelpfulnessNumerator, -HelpfulnessDenominator)
+# Step 4: Convert text to lowercase
+amzn_cleaned$Text <- tolower(amzn_cleaned$Text)
+# Step 5: Remove punctuation and special characters
+amzn_cleaned$Text <- removePunctuation(amzn_cleaned$Text)
+# Step 6: Remove white spaces
+amzn_cleaned$Text <- stripWhitespace(amzn_cleaned$Text)
+# Step 7: Remove English "stopwords"
+amzn_cleaned$Text <-
+  removeWords(amzn_cleaned$Text, stopwords("en"))
+# Display the first 240 rows of the cleaned and reformatted data
+datatable(
+   amzn_cleaned[1:240,],
+   options = list(pageLength = 10),
+   caption = "First 240 rows of cleaned data with new created variables.",
+   fillContainer = T)
+```
+
+# Analysis
+
+## 1. What is the overall sentiment distribution of the reviews?
+
+```{r, sent_analysis1, message=FALSE, warning=FALSE}
+# Classify sentiment based on the customer 'Score'. Score above 3 are positive, scores below 3 are negative and scores that are 3 are neutral
+amzn_cleaned$Sentiment <-
+  ifelse(amzn_cleaned$Score > 3,"positive",
+    ifelse(amzn_cleaned$Score < 3, "negative", 
+           "neutral")
+  )
+# Count the number of reviews in each sentiment category
+sentiment_counts <- amzn_cleaned %>%
+  group_by(Sentiment) %>%
+  summarize(Count = n())
+# Plot the sentiment distribution
+ggplot(sentiment_counts, aes(x = Sentiment, y = Count, fill = Sentiment)) + geom_col()  +
+  scale_fill_manual(values = c("negative" = "red",
+                                "neutral" = "blue",
+                                "positive" = "green")) + 
+  labs(title = "Sentiment Distribution", 
+       x = "Sentiment type", y = "Count")  +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12))
+```
+
+The overall sentiment distribution shows that there are more positive reviews
+in the data set.
+
+## 2. How does the sentiment change over time?
+
+```{r, sent_analysis2, message=FALSE, warning=FALSE}
+# Monthly sentiment distribution
+monthly_sentiment <- amzn_cleaned %>%
+            group_by(Year_Month, Sentiment) %>%
+            mutate(Sentiment = as.factor(Sentiment)) %>%
+            summarize(Count = n())
+# Plot sentiment change over time
+ggplotly(
+  ggplot(
+    monthly_sentiment,
+    aes(x = Year_Month, y = Count, color = Sentiment, group = Sentiment)) +
+    geom_line(size = 0.8) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 0.8, size = 2),
+          legend.title = element_blank(),
+          legend.position = "top") +
+    scale_color_manual(values = c("negative" = "red",
+                                  "neutral" = "blue",
+                                  "positive" = "green")) +
+    labs(title = "Sentiment Change Over Time",
+       x = "Year-Month",
+       y = "Number of Reviews")
+)
+```
+
+The sentiment distribution over time shows a seasonal pattern, were there is a
+rise in positive reviews in the 2nd and 4th quarters of the year, and a downward
+trend during the the first quarter. While the negative reviews show a rise
+during the last quarter and a decline during the first quarter.
+
+## 3. Are there any specific products that consistently receive positive/negative reviews?
+
+```{r, sent_analysis3, message=FALSE, warning=FALSE}
+# Group reviews by product and calculate sentiment distribution
+product_sentiment <- amzn_cleaned %>%
+    group_by(ProductId, Sentiment) %>%
+    summarize(Count = n())
+# Filter products with only Positive sentiment
+consistently_positive <- product_sentiment %>%
+  filter(Sentiment == "positive" & Count > 0) %>%
+  arrange(desc(Count))
+# Display top 1000 ProductIDs with the highest positive reviews
+datatable(
+  consistently_positive[1:1000,],
+  options = list(pageLength = 10),
+  caption = "First 1000 rows of ProductIDs with highest positive reviews.",
+   fillContainer = T)
+# Filter products with only Negative sentiment
+consistently_negative <- product_sentiment %>%
+  filter(Sentiment == "negative" & Count > 0) %>%
+  arrange(desc(Count))
+# Display top 1000 ProductIDs with the highest negative reviews
+datatable(
+  consistently_negative[1:1000,],
+  options = list(pageLength = 10),
+  caption = "First 1000 rows of ProductIDs with highest negative reviews.",
+   fillContainer = T)
+```
+
+The first table shows the list of products that have high number of positive reviews, while the second table shows the products with the highest number of 
+negative reviews.
+
+## 4. Do certain review lengths tend to have more positive or negative sentiment?
+
+```{r, sent_analysis4, message=FALSE, warning=FALSE}
+# Calculate the review lengths
+amzn_cleaned$ReviewLength <- nchar(amzn_cleaned$Text)
+# Group reviews by review length and calculate sentiment distribution
+review_length_sentiment <- amzn_cleaned %>%
+  group_by(ReviewLength, Sentiment) %>%
+  summarize(Count = n())
+# Plot sentiment vs. review length
+ggplot(review_length_sentiment, aes(x = ReviewLength,
+                                       y = Count, color = Sentiment)) +
+  geom_boxplot() + scale_y_log10() +
+  labs(title = "Sentiment vs. Review Length",
+               x = "Review Length",
+               y = "Number of Reviews in (Log 10) Scale") +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12)) +
+  scale_color_manual(values = c("positive" = "green",
+                                  "negative" = "red",
+                                  "neutral" = "blue"))
+```
+
+Negative reviews tend to be shorter than positive reviews, while neutral reviews tend to be long. It also emphasizes that there are more positive reviews then negative reviews in the data set.
+
+## 5. How does the sentiment differ between different user ratings?
+
+```{r, sent_analysis5, message=FALSE, warning=FALSE}
+# Group reviews by user rating to calculate sentiment distribution
+rating_sentiment <- amzn_cleaned %>%
+    group_by(Score, Sentiment) %>%
+    summarize(Count = n())
+# Plot sentiment by user rating
+ggplot(rating_sentiment, aes(x = as.factor(Score), y = Count, fill = Sentiment)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme(legend.position = "top",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 12)) +
+  labs(title = "Sentiment Variation Across User Ratings",
+       x = "Customer Rating",
+       y = "Number of Reviews",
+       fill = "Sentiment") +
+  scale_fill_manual(values = c("positive" = "green", 
+                                "negative" = "red", 
+                                "neutral" = "blue"))
+```
+
+Customers are generous with ratings when they are happy. Positive reviews 
+will most likely receive a 5-star and negative reviews a 1-star.
+
+# Conclusion
+
+1. The lack of sales data for each product, which could have been used
+to  calculate the sentiment-to-sales ratio for each product. This ratio would provide insights into how positively the products are perceived by customers relative to their sales performance.
+
+2. The data lacks geographical data which can be used to calculate how
+sentiments differ base on geographical location and how that could affect
+sales.
+
+3. The data lacks categorization of products, which could be used to identify
+product categories with consistent high positive or negative sentiments and
+how that could affect sales performance.

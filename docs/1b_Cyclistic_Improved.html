@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Aliyu Atiku Mustapha" />
+
+<meta name="date" content="2023-07-26" />
+
+<title>Case Study 1: How Does a Bike-Share Navigate Speedy Success?</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.28/datatables.js"></script>
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-6.4.0/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.0/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Data Science Portfolio</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="http://github.com/alatiku">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/aliyu-atiku">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="1a_Cyclistic.html">Google Data Analytics-I</a>
+</li>
+<li>
+  <a href="1b_Cyclistic_Improved.html">Google Data Analytics-II</a>
+</li>
+<li>
+  <a href="2_sentiment_analysis.html">Sentiment Analysis</a>
+</li>
+<li>
+  <a href="3_churn.html">Churn Analysis</a>
+</li>
+<li>
+  <a href="4_Wine-Quality-Classifier.html">Classification Modeling</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Case Study 1: How Does a Bike-Share
+Navigate Speedy Success?</h1>
+<h4 class="author">Aliyu Atiku Mustapha</h4>
+<h4 class="date">2023-07-26</h4>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<div id="this-capstone-project-is-for-the-google-data-analytics-course."
+class="section level2">
+<h2>This capstone project is for the Google Data Analytics course.</h2>
+<div
+id="after-dedicatting-a-year-refining-my-r-skills-through-immersive-courses-notably-on-datacamp.-in-july-2023-i-revisited-the-cyclistic-project-to-apply-my-enhanced-abilities."
+class="section level3">
+<h3>After dedicatting a year refining my R skills through immersive
+courses, notably on DataCamp. In July 2023, I revisited the Cyclistic
+project to apply my enhanced abilities.</h3>
+<p>This case study focuses on analyzing the bike-share program of
+Cyclistic, a company in Chicago, with the goal of understanding the
+differences between annual members and casual riders. The objective is
+to design a new marketing strategy to convert casual riders into annual
+members. The analysis will leverage Cyclistic’s historical trip data and
+explore various trends and patterns.</p>
+</div>
+</div>
+</div>
+<div id="stakeholders" class="section level1">
+<h1>Stakeholders</h1>
+<ol style="list-style-type: decimal">
+<li><p>Lily Moreno - Director of Marketing</p></li>
+<li><p>Cyclistic Marketing Analytics Team</p></li>
+<li><p>Cyclistic Executive Team</p></li>
+</ol>
+</div>
+<div id="business-questions" class="section level1">
+<h1>Business Questions</h1>
+<p>How do annual members and casual riders use Cyclistic bikes
+differently? Why would casual riders buy Cyclistic annual memberships?
+How can Cyclistic use digital media to influence casual riders to become
+members?</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>The data used in this analysis was sourced from the company’s <a
+href="https://divvy-tripdata.s3.amazonaws.com/index.html">Cyclistic’s
+historical trip data</a>. The data consists of 1 year usage history
+between the months of June 2021 and May 2022.</p>
+<p>The data consists of 1 year usage history between the months of June
+2021 and May 2022. The data consists of 5,860,776 rows and 13 Columns as
+listed below:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Column Name</th>
+<th>Column Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ride_id</td>
+<td>Unique ride ID</td>
+</tr>
+<tr class="even">
+<td>rideable_type</td>
+<td>Bike type</td>
+</tr>
+<tr class="odd">
+<td>started_at</td>
+<td>Starting time of ride</td>
+</tr>
+<tr class="even">
+<td>ended_at</td>
+<td>Ending time of ride</td>
+</tr>
+<tr class="odd">
+<td>start_station_name</td>
+<td>Station ride started at</td>
+</tr>
+<tr class="even">
+<td>start_station_id</td>
+<td>Station ID ride started at</td>
+</tr>
+<tr class="odd">
+<td>end_station_name</td>
+<td>Station ride ended at</td>
+</tr>
+<tr class="even">
+<td>end_station_id</td>
+<td>Station ID ride ended at</td>
+</tr>
+<tr class="odd">
+<td>start_lat</td>
+<td>Latitude ride started at</td>
+</tr>
+<tr class="even">
+<td>start_lng</td>
+<td>Longitude ride started at</td>
+</tr>
+<tr class="odd">
+<td>end_lat</td>
+<td>Latitude ride ended at</td>
+</tr>
+<tr class="even">
+<td>end_lng</td>
+<td>Longitude ride ended at</td>
+</tr>
+<tr class="odd">
+<td>member_casual</td>
+<td>Membership type of rider</td>
+</tr>
+</tbody>
+</table>
+<div id="data-preparation" class="section level2">
+<h2>Data Preparation</h2>
+<pre class="r"><code># Load tidyverse package
+library(tidyverse)
+# Load DT package
+library(DT)
+# Load plotly package
+library(plotly)
+# Load knitr package
+library(knitr)
+# Set constant size for plots
+knitr::opts_chunk$set(fig.width = 8, fig.height = 5)</code></pre>
+<p>To begin the analysis, we need to import the monthly trip data for a
+period of 12 months. A quick pick of the first 50 rows of the data
+displayed, notice the missing values in some variables. It is necessary
+to further investigate the data structure and composition.</p>
+<pre class="r"><code>bikes_full &lt;-
+  bind_rows(lapply(
+    list.files(
+      path = &quot;E:/My Data Science Portfolio/Datasets/Bikeshare_Data&quot;,
+      pattern = &quot;divvy-tripdata.csv$&quot;,
+      full.names = TRUE
+    ),
+    read_csv
+  ))
+# Calculate total number of rows in data
+cat(&quot;The bikeshare dataset has&quot;,nrow(bikes_full), &quot;rows.&quot;)</code></pre>
+<pre><code>## The bikeshare dataset has 5860776 rows.</code></pre>
+<pre class="r"><code># Display the first 100 rows of imported data
+datatable(
+  bikes_full[1:100,],
+  options = list(pageLength = 20),
+  caption = &quot;The first 100 rows of loaded data.&quot;,
+  fillContainer = T)</code></pre>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-72af35a854c6a2ffd2d8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-72af35a854c6a2ffd2d8">{"x":{"filter":"none","vertical":false,"caption":"<caption>The first 100 rows of loaded data.<\/caption>","fillContainer":true,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100"],["99FEC93BA843FB20","06048DCFC8520CAF","9598066F68045DF2","B03C0FE48C412214","B9EEA89F8FEE73B7","62B943CEAAA420BA","7E2546FBA79C46EE","3DDF3BBF6C4C3C89","2608805637155AB6","AF529C946F28ED42","E6010941FB92E4A6","1149C0723F7AFFD5","8762DB62099E6011","BE3AC77CBFF17E6A","8E9F2CB0893B96A0","6344B71B7BB6E09E","59CE9444E2ED2530","2D6929277855EBE5","F7107122A837A50B","45ABF9231CC02E3C","72A9D5DE0570104F","82EDA4ED954704C5","922E13B48EA4669B","77A2D0AE046B18ED","56E82E79B2D32963","2898BD8A94246F91","7541F4775B76B62F","901AD3F46D418897","EADD330AC4F28667","AACFC0AD742E15BC","5620F68FAF041C96","8FA2BB0200F008D4","5A8763CE97B3A8A0","98B404C87F4122E1","9822A8E834308933","A714D49E229150CD","3EF7CA50A21BEB5B","D6D06D1E6C4B3AAA","73FAA1C75EE2548E","70FD4BA48730FB8C","33891F0F00036C9C","BB764626C8627DBC","BB76805F3AA2DB21","36BD8B9A9606DE12","86FD7B218D70DCFB","E0A442C8EE0E9538","B67725D9606A85F8","0C213740A7CDFA4D","E75148DEE48C13D0","77904BEC09446E8D","0D904FEC5F84A538","C4185F300D6B552B","084B50A56D96F00C","60F97090AC85F55E","FB01BFE0C295B22B","9F8A6A90B1B3E083","FBC7B1F0160AA304","37A52001AEEFA4E5","76EBCE0447BD7276","A983B0285F949434","18A43747D6725F40","F33251175ABE836D","0DBFA221F45B20FA","095FD6C608510156","42369ACFF2D6A1FA","E86EFC2EF5462AAF","E49E5426F0B74023","BBE0E4CB78DC0C1C","5C82525EA81EE731","005F84793A1B6CA3","CC1DD5FE24C22927","BA16164272308D6C","2D7C13EA5494E100","96C90CEA38DC9D59","57802BCD7A4EB75F","7B9B8F431B6B46B5","C0B2A2D07DA7795A","B67171B41889482B","343597E46A233858","4CF3D9C5DD036935","EA62343059A2CE84","318F391B5A5E11EA","CBA9394BDEC25955","A0FCE305E80B1CF0","BE652C0BA89F0F19","1F4223B4DA441392","BDA9627EE0A0FC2E","D4EC17F2B5D6725A","A5877E4976F9FDBD","ADA876FA80A2AFB6","1402BC0102F8401B","997C8A5373256DFC","D5BEFD5891985FAC","AF7BB3D697992127","931CB7633018437F","B00B4A21AB969648","A8187E8E0E12D9DA","B8B7CD076CD9238D","7C0256DC1B909725","3F3E7D050BC7BE4C"],["electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","classic_bike","classic_bike","electric_bike","classic_bike","electric_bike","electric_bike","classic_bike","classic_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","classic_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","classic_bike","electric_bike","electric_bike","electric_bike","electric_bike","classic_bike","electric_bike","classic_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","classic_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike","electric_bike"],["6/13/2021 14:31","6/4/2021 11:18","6/4/2021 9:49","6/3/2021 19:56","6/4/2021 14:05","6/3/2021 19:32","6/10/2021 16:30","6/10/2021 17:00","6/10/2021 12:46","6/23/2021 17:57","6/22/2021 19:28","6/29/2021 17:35","6/5/2021 14:55","6/5/2021 14:05","6/5/2021 13:39","6/22/2021 18:52","6/2/2021 10:30","6/8/2021 13:49","6/8/2021 18:31","6/7/2021 22:24","6/8/2021 17:02","6/8/2021 12:20","6/8/2021 10:58","6/8/2021 10:34","6/26/2021 10:09","6/25/2021 21:18","6/9/2021 18:31","6/9/2021 18:51","6/5/2021 12:32","6/29/2021 12:48","6/29/2021 16:24","6/29/2021 14:03","6/7/2021 17:36","6/7/2021 18:52","6/4/2021 16:26","6/4/2021 11:51","6/4/2021 15:18","6/4/2021 18:59","6/4/2021 15:30","6/25/2021 19:51","6/21/2021 17:52","6/18/2021 10:13","6/28/2021 2:55","6/27/2021 23:13","6/27/2021 21:28","6/28/2021 2:27","6/28/2021 18:52","6/17/2021 23:09","6/17/2021 22:06","6/18/2021 0:53","6/4/2021 7:29","6/23/2021 8:39","6/30/2021 10:31","6/27/2021 12:26","6/7/2021 14:37","6/12/2021 17:15","6/1/2021 12:30","6/1/2021 11:32","6/5/2021 15:50","6/6/2021 11:27","6/6/2021 10:14","6/6/2021 14:38","6/21/2021 14:35","6/21/2021 14:15","6/21/2021 12:50","6/21/2021 14:03","6/17/2021 17:55","6/11/2021 5:16","6/21/2021 8:49","6/29/2021 16:08","6/27/2021 16:46","6/27/2021 16:07","6/20/2021 11:12","6/20/2021 10:29","6/20/2021 11:23","6/25/2021 18:54","6/14/2021 21:18","6/7/2021 8:14","6/16/2021 17:28","6/16/2021 8:05","6/16/2021 9:46","6/17/2021 20:06","6/26/2021 16:26","6/14/2021 7:31","6/16/2021 0:19","6/15/2021 22:31","6/15/2021 22:24","6/29/2021 16:50","6/5/2021 10:11","6/4/2021 20:28","6/29/2021 23:30","6/29/2021 13:11","6/13/2021 2:10","6/22/2021 21:05","6/21/2021 22:26","6/12/2021 13:57","6/5/2021 13:18","6/16/2021 1:47","6/16/2021 8:54","6/16/2021 10:20"],["6/13/2021 14:34","6/4/2021 11:24","6/4/2021 9:55","6/3/2021 20:21","6/4/2021 14:09","6/3/2021 19:38","6/10/2021 16:36","6/10/2021 17:06","6/10/2021 12:55","6/23/2021 18:06","6/22/2021 19:39","6/29/2021 17:55","6/5/2021 15:13","6/5/2021 14:09","6/5/2021 13:57","6/22/2021 18:59","6/2/2021 10:37","6/8/2021 13:53","6/8/2021 18:38","6/7/2021 22:35","6/8/2021 17:29","6/8/2021 12:23","6/8/2021 11:03","6/8/2021 10:37","6/26/2021 10:13","6/25/2021 21:22","6/9/2021 18:35","6/9/2021 18:57","6/5/2021 12:45","6/29/2021 13:50","6/29/2021 16:30","6/29/2021 14:10","6/7/2021 17:39","6/7/2021 18:59","6/4/2021 16:37","6/4/2021 12:42","6/4/2021 15:26","6/4/2021 19:03","6/4/2021 15:35","6/25/2021 20:19","6/21/2021 17:59","6/18/2021 10:26","6/28/2021 3:16","6/27/2021 23:48","6/27/2021 21:45","6/28/2021 2:52","6/28/2021 19:09","6/17/2021 23:37","6/17/2021 22:21","6/18/2021 0:58","6/4/2021 7:45","6/23/2021 8:41","6/30/2021 10:31","6/27/2021 12:34","6/7/2021 14:52","6/12/2021 17:23","6/1/2021 12:33","6/1/2021 11:34","6/5/2021 16:01","6/6/2021 11:31","6/6/2021 10:18","6/6/2021 15:00","6/21/2021 14:37","6/21/2021 14:24","6/21/2021 13:24","6/21/2021 14:11","6/17/2021 17:58","6/11/2021 5:54","6/21/2021 9:01","6/29/2021 16:15","6/27/2021 16:55","6/27/2021 16:08","6/20/2021 11:20","6/20/2021 10:44","6/20/2021 11:26","6/25/2021 19:06","6/14/2021 21:50","6/7/2021 8:15","6/16/2021 17:46","6/16/2021 8:19","6/16/2021 9:49","6/17/2021 20:25","6/26/2021 16:34","6/14/2021 7:34","6/16/2021 0:35","6/15/2021 22:44","6/15/2021 22:25","6/29/2021 17:11","6/5/2021 10:17","6/4/2021 20:35","6/29/2021 23:57","6/29/2021 13:14","6/13/2021 2:25","6/22/2021 21:34","6/21/2021 22:33","6/12/2021 14:19","6/5/2021 13:43","6/16/2021 1:50","6/16/2021 9:01","6/16/2021 10:24"],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"Orleans St &amp; Elm St","Desplaines St &amp; Kinzie St",null,"Clark St &amp; Grace St",null,null,"Kingsbury St &amp; Kinzie St","Desplaines St &amp; Kinzie St",null,null,null,null,null,null,null,null,"Kingsbury St &amp; Kinzie St",null,null,null,null,null,null,null,null,null,"Sheridan Rd &amp; Noyes St (NU)",null,null,null,null,"Sheridan Rd &amp; Noyes St (NU)",null,"Desplaines St &amp; Kinzie St",null,null,null,"Larrabee St &amp; Armitage Ave",null,null,"Sheridan Rd &amp; Noyes St (NU)",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"TA1306000006","TA1306000003",null,"TA1307000127",null,null,"KA1503000043","TA1306000003",null,null,null,null,null,null,null,null,"KA1503000043",null,null,null,null,null,null,null,null,null,"604",null,null,null,null,"604",null,"TA1306000003",null,null,null,"TA1309000006",null,null,"604",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,"Michigan Ave &amp; Oak St",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"Orleans St &amp; Elm St","Kingsbury St &amp; Kinzie St",null,"Clark St &amp; Leland Ave",null,"Michigan Ave &amp; Oak St","Desplaines St &amp; Kinzie St","Kingsbury St &amp; Kinzie St","Clark St &amp; Leland Ave",null,null,null,null,null,null,null,"Desplaines St &amp; Kinzie St",null,null,null,null,null,null,null,null,null,"Sheridan Rd &amp; Noyes St (NU)",null,null,null,null,"Sheridan Rd &amp; Noyes St (NU)",null,"Kingsbury St &amp; Kinzie St",null,null,null,null,null,null,"Sheridan Rd &amp; Noyes St (NU)",null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,"13042",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"TA1306000006","KA1503000043",null,"TA1309000014",null,"13042","TA1306000003","KA1503000043","TA1309000014",null,null,null,null,null,null,null,"TA1306000003",null,null,null,null,null,null,null,null,null,"604",null,null,null,null,"604",null,"KA1503000043",null,null,null,null,null,null,"604",null,null,null,null,null,null,null,null,null],[41.8,41.79,41.8,41.78,41.8,41.78,41.79,41.79,41.93,41.88,41.87,41.9,41.89,41.89,41.88,41.79,41.79,41.79,41.78,41.79,41.79,41.78,41.78,41.78,41.7,41.71,41.95,41.95,41.91,41.79,41.78,41.8,41.79,41.78,41.8,41.79,41.8,41.8,41.79,41.89,41.89,41.98,41.78,41.78,41.79,41.77,41.8,41.77,41.79,41.8,41.902924,41.88871604,41.9,41.95078,41.8,41.89,41.88917683,41.88871604,41.96,41.97,41.97,41.94,41.96,41.95,41.94,41.96,41.88917683,41.92,41.94,41.89,41.92,41.96,41.95,41.95,41.96,41.9,42.058239,41.95,41.97,41.94,41.96,42.058239,41.91,41.88871604,41.93,41.96,41.96,41.918109,42.04,42.04,42.058239,41.95,41.93,41.96,41.88,41.94,41.87,41.97,41.97,41.97],[-87.59,-87.59,-87.59999999999999,-87.58,-87.59,-87.58,-87.59999999999999,-87.59,-87.67,-87.61,-87.62,-87.63,-87.62,-87.62,-87.62,-87.59,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.58,-87.59,-87.59999999999999,-87.61,-87.59999999999999,-87.56,-87.56,-87.66,-87.67,-87.70999999999999,-87.59999999999999,-87.59999999999999,-87.59,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.59,-87.59999999999999,-87.59999999999999,-87.66,-87.63,-87.66,-87.59,-87.62,-87.59,-87.58,-87.59,-87.56999999999999,-87.59,-87.59,-87.637715,-87.64444785000001,-87.7,-87.659172,-87.59999999999999,-87.61,-87.63850576999999,-87.64444785000001,-87.64,-87.66,-87.65000000000001,-87.66,-87.72,-87.7,-87.70999999999999,-87.72,-87.63850576999999,-87.67,-87.73,-87.64,-87.73,-87.75,-87.7,-87.70999999999999,-87.72,-87.69,-87.677432,-87.66,-87.76000000000001,-87.72,-87.72,-87.677432,-87.72,-87.64444785000001,-87.73,-87.75,-87.75,-87.64377933,-87.68000000000001,-87.67,-87.677432,-87.72,-87.68000000000001,-87.75,-87.65000000000001,-87.72,-87.63,-87.65000000000001,-87.65000000000001,-87.66],[41.8,41.8,41.79,41.8,41.79,41.78,41.79,41.8,41.94,41.90105217,41.87,41.9,41.88,41.89,41.89,41.8,41.8,41.78,41.8,41.78,41.78,41.79,41.78,41.78,41.71,41.7,41.95,41.96,41.93,41.8,41.8,41.78,41.78,41.79,41.8,41.86,41.79,41.8,41.8,41.89,41.91,41.95,41.8,41.77,41.78,41.78,41.77,41.8,41.77,41.8,41.902924,41.88917683,41.9,41.967096,41.8,41.90104767,41.88871604,41.88917683,41.967113,41.97,41.97,41.9,41.96,41.96,41.96,41.95,41.88871604,41.96,41.96,41.88,41.94,41.96,41.96,41.95,41.96,41.91,42.058239,41.95,41.94,41.97,41.96,42.058239,41.91,41.88917683,41.96,41.93,41.96,41.87,42.04,42.04,42.058239,41.96,41.94,41.92,41.89,41.92,41.91,41.97,41.97,41.97],[-87.59999999999999,-87.59999999999999,-87.59,-87.59999999999999,-87.59,-87.58,-87.59,-87.59,-87.68000000000001,-87.623698,-87.64,-87.68000000000001,-87.62,-87.62,-87.62,-87.59999999999999,-87.59,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.61,-87.56,-87.56,-87.67,-87.67,-87.7,-87.59,-87.59999999999999,-87.59999999999999,-87.59999999999999,-87.58,-87.59999999999999,-87.66,-87.59999999999999,-87.59,-87.59999999999999,-87.63,-87.63,-87.67,-87.59,-87.58,-87.62,-87.59,-87.58,-87.59,-87.56999999999999,-87.58,-87.637715,-87.63850576999999,-87.7,-87.667429,-87.59,-87.62381182999999,-87.64444785000001,-87.63850576999999,-87.66715883000001,-87.65000000000001,-87.66,-87.63,-87.72,-87.72,-87.72,-87.7,-87.64444785000001,-87.75,-87.75,-87.66,-87.73,-87.75,-87.72,-87.7,-87.72,-87.67,-87.677432,-87.66,-87.72,-87.76000000000001,-87.72,-87.677432,-87.69,-87.63850576999999,-87.75,-87.73,-87.75,-87.63,-87.68000000000001,-87.68000000000001,-87.677432,-87.72,-87.68000000000001,-87.67,-87.66,-87.67,-87.68000000000001,-87.65000000000001,-87.66,-87.65000000000001],["member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","casual","casual","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member","member"],["41.8,-87.59","41.79,-87.59","41.8,-87.6","41.78,-87.58","41.8,-87.59","41.78,-87.58","41.79,-87.6","41.79,-87.59","41.93,-87.67","41.88,-87.61","41.87,-87.62","41.9,-87.63","41.89,-87.62","41.89,-87.62","41.88,-87.62","41.79,-87.59","41.79,-87.6","41.79,-87.6","41.78,-87.6","41.79,-87.58","41.79,-87.59","41.78,-87.6","41.78,-87.61","41.78,-87.6","41.7,-87.56","41.71,-87.56","41.95,-87.66","41.95,-87.67","41.91,-87.71","41.79,-87.6","41.78,-87.6","41.8,-87.59","41.79,-87.6","41.78,-87.6","41.8,-87.6","41.79,-87.6","41.8,-87.59","41.8,-87.6","41.79,-87.6","41.89,-87.66","41.89,-87.63","41.98,-87.66","41.78,-87.59","41.78,-87.62","41.79,-87.59","41.77,-87.58","41.8,-87.59","41.77,-87.57","41.79,-87.59","41.8,-87.59","41.902924,-87.637715","41.888716036,-87.6444478533","41.9,-87.7","41.95078,-87.659172","41.8,-87.6","41.89,-87.61","41.88917683258,-87.6385057718","41.888716036,-87.6444478533","41.96,-87.64","41.97,-87.66","41.97,-87.65","41.94,-87.66","41.96,-87.72","41.95,-87.7","41.94,-87.71","41.96,-87.72","41.88917683258,-87.6385057718","41.92,-87.67","41.94,-87.73","41.89,-87.64","41.92,-87.73","41.96,-87.75","41.95,-87.7","41.95,-87.71","41.96,-87.72","41.9,-87.69","42.058239,-87.677432","41.95,-87.66","41.97,-87.76","41.94,-87.72","41.96,-87.72","42.058239,-87.677432","41.91,-87.72","41.888716036,-87.6444478533","41.93,-87.73","41.96,-87.75","41.96,-87.75","41.918109,-87.6437793333333","42.04,-87.68","42.04,-87.67","42.058239,-87.677432","41.95,-87.72","41.93,-87.68","41.96,-87.75","41.88,-87.65","41.94,-87.72","41.87,-87.63","41.97,-87.65","41.97,-87.65","41.97,-87.66"],["41.8,-87.6","41.8,-87.6","41.79,-87.59","41.8,-87.6","41.79,-87.59","41.78,-87.58","41.79,-87.59","41.8,-87.59","41.94,-87.68","41.9010521666666,-87.623698","41.87,-87.64","41.9,-87.68","41.88,-87.62","41.89,-87.62","41.89,-87.62","41.8,-87.6","41.8,-87.59","41.78,-87.6","41.8,-87.6","41.78,-87.6","41.78,-87.6","41.79,-87.6","41.78,-87.6","41.78,-87.61","41.71,-87.56","41.7,-87.56","41.95,-87.67","41.96,-87.67","41.93,-87.7","41.8,-87.59","41.8,-87.6","41.78,-87.6","41.78,-87.6","41.79,-87.58","41.8,-87.6","41.86,-87.66","41.79,-87.6","41.8,-87.59","41.8,-87.6","41.89,-87.63","41.91,-87.63","41.95,-87.67","41.8,-87.59","41.77,-87.58","41.78,-87.62","41.78,-87.59","41.77,-87.58","41.8,-87.59","41.77,-87.57","41.8,-87.58","41.902924,-87.637715","41.88917683258,-87.6385057718","41.9,-87.7","41.967096,-87.667429","41.8,-87.59","41.9010476666666,-87.6238118333333","41.888716036,-87.6444478533","41.88917683258,-87.6385057718","41.967113,-87.6671588333333","41.97,-87.65","41.97,-87.66","41.9,-87.63","41.96,-87.72","41.96,-87.72","41.96,-87.72","41.95,-87.7","41.888716036,-87.6444478533","41.96,-87.75","41.96,-87.75","41.88,-87.66","41.94,-87.73","41.96,-87.75","41.96,-87.72","41.95,-87.7","41.96,-87.72","41.91,-87.67","42.058239,-87.677432","41.95,-87.66","41.94,-87.72","41.97,-87.76","41.96,-87.72","42.058239,-87.677432","41.91,-87.69","41.88917683258,-87.6385057718","41.96,-87.75","41.93,-87.73","41.96,-87.75","41.87,-87.63","42.04,-87.68","42.04,-87.68","42.058239,-87.677432","41.96,-87.72","41.94,-87.68","41.92,-87.67","41.89,-87.66","41.92,-87.67","41.91,-87.68","41.97,-87.65","41.97,-87.66","41.97,-87.65"],["00:02:43","00:06:17","00:05:59","00:25:50","00:04:08","00:06:45","00:06:11","00:06:18","00:08:46","00:09:11","00:11:46","00:19:22","00:18:24","00:04:01","00:18:17","00:06:20","00:06:52","00:03:58","00:06:54","00:11:17","00:27:45","00:03:27","00:04:35","00:03:33","00:03:56","00:03:24","00:04:25","00:05:36","00:13:14","01:02:17","00:05:45","00:06:42","00:03:03","00:06:38","00:11:37","00:50:14","00:07:43","00:04:28","00:04:46","00:28:08","00:07:23","00:12:31","00:20:39","00:34:52","00:16:50","00:25:01","00:17:15","00:27:16","00:14:55","00:05:14","00:16:16","00:02:01","00:00:29","00:07:47","00:15:10","00:08:46","00:02:38","00:02:26","00:11:51","00:03:44","00:03:43","00:21:49","00:02:24","00:08:53","00:34:06","00:08:29","00:03:38","00:38:25","00:11:45","00:07:03","00:09:01","00:01:02","00:07:57","00:14:29","00:02:47","00:12:02","00:32:34","00:00:51","00:18:12","00:14:21","00:03:39","00:18:32","00:08:17","00:02:46","00:16:44","00:12:56","00:01:23","00:20:44","00:06:15","00:06:53","00:26:58","00:03:31","00:15:05","00:29:20","00:06:48","00:22:07","00:25:37","00:03:43","00:06:28","00:04:41"],[1,6,6,5,6,5,5,5,5,4,3,3,7,7,7,3,4,3,3,2,3,3,3,3,7,6,4,4,7,3,3,3,2,2,6,6,6,6,6,6,2,6,2,1,1,2,2,5,5,6,6,4,4,1,2,7,3,3,7,1,1,1,2,2,2,2,5,6,2,3,1,1,1,1,1,6,2,2,4,4,4,5,7,2,4,3,3,3,7,6,3,3,1,3,2,7,7,4,4,4]],"container":"<table class=\"display fill-container\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ride_id<\/th>\n      <th>rideable_type<\/th>\n      <th>started_at<\/th>\n      <th>ended_at<\/th>\n      <th>start_station_name<\/th>\n      <th>start_station_id<\/th>\n      <th>end_station_name<\/th>\n      <th>end_station_id<\/th>\n      <th>start_lat<\/th>\n      <th>start_lng<\/th>\n      <th>end_lat<\/th>\n      <th>end_lng<\/th>\n      <th>member_casual<\/th>\n      <th>start_coordinate<\/th>\n      <th>end_coordinate<\/th>\n      <th>ride_length<\/th>\n      <th>day_of_week<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"columnDefs":[{"className":"dt-right","targets":[9,10,11,12,17]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="data-properties" class="section level2">
+<h2>Data Properties</h2>
+<p>To understand the data composition, the class of each variable
+together with the number and proportion of missing values for each
+variable will provide a deeper insight to the data structure and how it
+could be useful for analysis.</p>
+<pre class="r"><code># Check for class of each variable
+class_table &lt;- sapply(bikes_full, class)
+class_table &lt;- data.frame(
+  Variable = names(class_table),
+  Class = as.character(class_table),
+  stringsAsFactors = FALSE
+)
+# Check for the proportion of missing values in full data
+x &lt;- data.frame(miss = colSums(is.na(bikes_full)), 
+             prop = round((colSums(is.na(bikes_full)) / nrow(bikes_full)) * 100,                            2))
+properties &lt;- cbind(class_table,
+                    Values_missing = x[, 1],
+                    Proportion_missing = x[, 2])
+# Display the properties of the data
+kable(head(properties, 20),
+      caption = &quot;Table displaying the properties of data.&quot;)</code></pre>
+<table>
+<caption>Table displaying the properties of data.</caption>
+<colgroup>
+<col width="25%" />
+<col width="28%" />
+<col width="20%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Class</th>
+<th align="right">Values_missing</th>
+<th align="right">Proportion_missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ride_id</td>
+<td align="left">character</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">rideable_type</td>
+<td align="left">character</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">started_at</td>
+<td align="left">character</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">ended_at</td>
+<td align="left">character</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">start_station_name</td>
+<td align="left">character</td>
+<td align="right">823167</td>
+<td align="right">14.05</td>
+</tr>
+<tr class="even">
+<td align="left">start_station_id</td>
+<td align="left">character</td>
+<td align="right">823164</td>
+<td align="right">14.05</td>
+</tr>
+<tr class="odd">
+<td align="left">end_station_name</td>
+<td align="left">character</td>
+<td align="right">878338</td>
+<td align="right">14.99</td>
+</tr>
+<tr class="even">
+<td align="left">end_station_id</td>
+<td align="left">character</td>
+<td align="right">878338</td>
+<td align="right">14.99</td>
+</tr>
+<tr class="odd">
+<td align="left">start_lat</td>
+<td align="left">numeric</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">start_lng</td>
+<td align="left">numeric</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">end_lat</td>
+<td align="left">numeric</td>
+<td align="right">5036</td>
+<td align="right">0.09</td>
+</tr>
+<tr class="even">
+<td align="left">end_lng</td>
+<td align="left">numeric</td>
+<td align="right">5036</td>
+<td align="right">0.09</td>
+</tr>
+<tr class="odd">
+<td align="left">member_casual</td>
+<td align="left">character</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">start_coordinate</td>
+<td align="left">character</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">end_coordinate</td>
+<td align="left">character</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="even">
+<td align="left">ride_length</td>
+<td align="left">c(“hms”, “difftime”)</td>
+<td align="right">3</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">day_of_week</td>
+<td align="left">numeric</td>
+<td align="right">0</td>
+<td align="right">0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-cleaning-and-processing" class="section level2">
+<h2>Data Cleaning and Processing</h2>
+<p>Next, we’ll clean and format the data by creating new variables and
+dropping those not needed, especially those with high proportion of
+missing values, then prepare for analysis.</p>
+<pre class="r"><code>bikes_cleaned &lt;- bikes_full %&gt;%
+  mutate(
+# Step 1: Create ride length, month of trip, and hour columns
+    # Convert started_at to POSIXlt datetime
+    time_started = as.POSIXlt(started_at, format = &quot;%m/%d/%Y %H:%M&quot;),
+    time_ended = as.POSIXlt(ended_at, format = &quot;%m/%d/%Y %H:%M&quot;),
+    ride_length = difftime(time_ended, time_started, units = &quot;secs&quot;),
+    # Extract month from datetime
+    month_of_trip = format(time_ended, format = &quot;%m&quot;),
+    # Extract hour from datetime
+    hour = format(time_started, format = &quot;%H&quot;),
+# Step 2: Create and recode day_of_week to day names and order as factor
+    day_of_week = weekdays(time_started),
+    day_of_week = ordered(
+    day_of_week,
+    levels = c(&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;,
+                &quot;Friday&quot;, &quot;Saturday&quot;, &quot;Sunday&quot;)
+                          ),
+# Step 3: Create and recode months values to month abbreviations and order as factor
+    month_of_trip = month.abb[as.integer(month_of_trip)],
+    month_of_trip = ordered(
+    month_of_trip,
+    levels = c( &quot;Jan&quot;, &quot;Feb&quot;, &quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;, &quot;Jun&quot;,
+                &quot;Jul&quot;, &quot;Aug&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;Dec&quot;)
+                            )
+              ) %&gt;% 
+  # Step 4: Remove unwanted columns
+  select(-starts_with(&quot;start_&quot;),
+         -starts_with(&quot;end_&quot;),
+         -ride_id,
+         -started_at,
+         -ended_at)
+# # Display the first 100 rows of cleaned data
+# datatable(
+#   bikes_cleaned[1:100,],
+#   options = list(pageLength = 20),
+#   caption = &quot;The first 100 rows of cleaned and transformed data.&quot;,
+#   fillContainer = T)</code></pre>
+</div>
+</div>
+<div id="analysis" class="section level1">
+<h1>Analysis</h1>
+<p>To highlight trends and relationships in the data, we can create
+visualizations.</p>
+<pre class="r"><code># First calculate the split between member type
+num_members &lt;- bikes_cleaned %&gt;%
+  count(member_casual)
+# Pie chart to categorize member types
+num_members %&gt;%
+  mutate(percentage = round(n / sum(n) * 100, 1)) %&gt;%
+  ggplot(aes(x = &quot;&quot;, y = n, fill = member_casual)) +
+  geom_bar(stat = &quot;identity&quot;,
+           width = 1,
+           color = &quot;white&quot;) +
+  geom_text(aes(label = paste0(percentage, &quot;%&quot;)),
+            position = position_stack(vjust = 0.5)) +
+  coord_polar(&quot;y&quot;, start = 0) +
+  labs(title = &quot;Proportion of Members&quot;,
+       subtitle = &quot;Membership Dominance: More Members in Cyclistic&quot;) +
+  scale_fill_manual(
+    values = c(&quot;orange&quot;, &quot;blue&quot;),
+    labels = c(&quot;casual riders&quot;, &quot;annual members&quot;)
+  ) +
+  theme_void() +
+  theme(legend.title = element_text(&quot;Member Type&quot;))</code></pre>
+<p><img src="1b_Cyclistic_Improved_files/figure-html/piechart-1.png" width="768" /></p>
+<p>There are more member riders than casual riders in Cyclistic for the
+period May 2021 to June 2022.</p>
+<pre class="r"><code># Bar chart to compare member types&#39; activities through the week
+bikes_cleaned %&gt;%
+  ggplot(aes(x = day_of_week, fill = member_casual)) +
+  geom_bar(position = &quot;dodge&quot;) +
+  labs(
+    title = &quot;Rider Activities by Day of Week and Member Type.&quot;,
+    subtitle = &quot;Ride Patterns: Weekends for Casual Riders, Weekdays for Members.&quot;,
+    x = &quot;Day of Week&quot;,
+    y = &quot;Number of Trips&quot;
+  ) +
+  scale_fill_manual(values = c(&quot;blue&quot;, &quot;orange&quot;),
+                    labels = c(&quot;Member&quot;, &quot;Casual&quot;)) +
+  theme(legend.position = &quot;top&quot;, legend.title = element_blank())</code></pre>
+<p><img src="1b_Cyclistic_Improved_files/figure-html/barchart1-1.png" width="768" /></p>
+<p>Casual riders tend to use the bikes more on weekends than weekdays,
+which is when members use the bikes more!</p>
+<pre class="r"><code># Bar chart to compare member types&#39; activities through the week with bike types
+bikes_cleaned %&gt;%
+  ggplot(aes(x = day_of_week, fill = rideable_type)) +
+  geom_bar(position = &quot;dodge&quot;) +
+  labs(
+    title = &quot;Rider Activities by Day of Week and Bike Type.&quot;,
+    subtitle = &quot;Bike Preferences: Riders Opt for Classic and Electric.&quot;,
+    x = &quot;Day of Week&quot;,
+    y = &quot;Number of Trips&quot;
+  ) +
+  scale_fill_manual(
+    values = c(&quot;blue&quot;, &quot;purple&quot;, &quot;orange&quot;),
+    labels = c(&quot;Classic Bike&quot;, &quot;Docked Bike&quot;, &quot;Electric Bike&quot;)
+  ) +
+  facet_grid(. ~ member_casual) +
+  theme(
+    legend.position = &quot;top&quot;,
+    legend.title = element_blank(),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )</code></pre>
+<p><img src="1b_Cyclistic_Improved_files/figure-html/barchart2-1.png" width="768" /></p>
+<p>Casual riders show a small appetite for using the dock bikes, but the
+classic and electric bikes are more preferred by both types of
+members.</p>
+<pre class="r"><code># Lollipop chart showing number of trips monthly
+num_trips_month &lt;- bikes_cleaned %&gt;%
+  group_by(month_of_trip, member_casual) %&gt;%
+  summarise(num_trips = n())
+mem_max_trip &lt;- num_trips_month %&gt;%
+  filter(member_casual == &quot;member&quot;) %&gt;%
+  pull(num_trips) %&gt;%
+  max()
+num_trips_month %&gt;%
+  ggplot(aes(x = month_of_trip, y = num_trips, color = month_of_trip)) +
+  geom_point(size = 4) +
+  geom_segment(aes(
+    x = month_of_trip,
+    xend = month_of_trip,
+    y = 0,
+    yend = num_trips
+  )) +
+  geom_hline(yintercept = mem_max_trip,
+             linetype = &quot;dashed&quot;,
+             color = &quot;red&quot;) +
+  facet_grid(. ~ member_casual) +
+  theme(
+    legend.position = &quot;none&quot;,
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  labs(
+    title = &quot;Number of Trips per Month.&quot;,
+    subtitle = &quot;Summer Vibes: Rides Soar with Casual Riders.&quot;,
+    x = &quot;Month&quot;,
+    y = &quot;Number of Trips&quot;
+  )</code></pre>
+<p><img src="1b_Cyclistic_Improved_files/figure-html/lollipop-1.png" width="768" /></p>
+<p>The summer months have a higher number of rides generally, especially
+during the months of June, July and August, which is also when casual
+riders are more active the members.</p>
+<pre class="r"><code># Heatmap to show Trip Density by Time of Day and Day of Week
+bikes_cleaned %&gt;%
+  group_by(hour, day_of_week, member_casual) %&gt;%
+  summarise(trip_count = n()) %&gt;%
+  ggplot(aes(x = day_of_week, y = hour, fill = trip_count)) +
+  geom_tile() +
+  facet_grid(. ~ member_casual) +
+  labs(
+    title = &quot;Trip Density by Time of Day and Day of Week.&quot;,
+    subtitle = &quot;Hourly Riding Habits: Casual vs. Members.&quot;,
+    y = &quot;Hour of Day&quot;,
+    x = &quot;Day of Week&quot;,
+    fill = &quot;Trip Count&quot;
+  ) +
+  scale_fill_gradient(low = &quot;grey&quot;, high = &quot;purple&quot;) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
+<p><img src="1b_Cyclistic_Improved_files/figure-html/heatmap-1.png" width="768" /></p>
+<p>Casual riders tend to use the bikes more during weekends, while
+members are more active during weekdays. On weekdays, Casual riders are
+more active during the evening peak hours while Members ride more during
+the morning and evening peak hours.</p>
+<pre class="r"><code># Line plot to show Monthly Average Ride Lengths between Casual riders and Members
+bikes_cleaned %&gt;%
+  filter(!is.na(ride_length)) %&gt;%
+  group_by(month_of_trip, member_casual) %&gt;%
+  summarize(average_ride_length = mean(ride_length)) %&gt;%
+  ggplot(
+    aes(
+      x = month_of_trip,
+      y = average_ride_length,
+      group = member_casual,
+      color = member_casual
+    )
+  ) +
+  geom_line() +
+  labs(
+    title = &quot;Average monthly ride length per Member Type.&quot;,
+    subtitle = &quot;Time on Wheels: Casual Riders Embrace Longer Rides.&quot;,
+    x = &quot;Member Type&quot;,
+    y = &quot;Average Ride Length in Minutes&quot;
+  ) +
+  scale_fill_manual(values = c(&quot;orange&quot;, &quot;blue&quot;)) +
+  theme(legend.title = element_blank())</code></pre>
+<p><img src="1b_Cyclistic_Improved_files/figure-html/Lineplot-1.png" width="768" /></p>
+<p>Overall, casual riders tend to ride for longer compared to
+members.</p>
+</div>
+<div id="limitations-on-analysis" class="section level1">
+<h1>Limitations on analysis</h1>
+<p>The analysis of the bike data was hindered by missing data and
+information. Several columns, including start station names, end
+station, and station IDs, contained missing data, impacting the accuracy
+of the findings. Moreover, the absence of age and gender information for
+the riders limited the understanding of their influence on bike usage
+and hindered targeted marketing efforts. These limitations might have
+result in an incomplete representation of bike usage patterns,
+preventing the identification of preferences and usage patterns among
+different demographic groups.</p>
+<p>To address these issues in future research, techniques for imputing
+missing data could be applied, and efforts to collect additional data on
+age and gender information should be implemented. By mitigating these
+limitations, future analyses would offer more comprehensive insights
+into bike usage and enable more effective targeting strategies based on
+demographic characteristics.</p>
+</div>
+<div id="recommendations" class="section level1">
+<h1>Recommendations</h1>
+<ol style="list-style-type: decimal">
+<li><p>Run specific campaigns targeting casual riders at the stations
+during weekends, and evening peak periods during the weekdays.</p></li>
+<li><p>Marketing campaigns to get casual riders to become annual members
+should run more during the summer months, and specifically during the
+months of June, July and August when Casual riders show more
+activeness.</p></li>
+<li><p>Marketing campaigns could showcase the essence of becoming
+members by highlighting the exclusive benefits that members receive,
+such as significant discounts on longer rides.</p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

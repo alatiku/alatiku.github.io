@@ -1,0 +1,21 @@
+name: "MyPortfolio"
+navbar:
+  title: "My Data Science Portfolio"
+  left:
+    - icon: fa-github fa-lg
+      href: http://github.com/alatiku
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/aliyu-atiku
+    - text: "Home"
+      href: index.html
+    - text: "Google Data Analytics-I"
+      href: 1a_Cyclistic.html
+    - text: "Google Data Analytics-II"
+      href: 1b_Cyclistic_Improved.html
+    - text: "Sentiment Analysis"
+      href: 2_sentiment_analysis.html
+    - text: "Churn Analysis"
+      href: 3_churn.html
+    - text: "Classification Modeling"
+      href: 4_Wine-Quality-Classifier.html
+output_dir: "docs"

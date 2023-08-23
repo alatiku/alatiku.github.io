@@ -1,0 +1,218 @@
+---
+title: "Case Study 1: How Does a Bike-Share Navigate Speedy Success?"
+author: "Aliyu Atiku Mustapha"
+date: "2022-07-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 2
+    code_folding: hide
+---
+## This capstone project is for the Google Data Analytics course.
+
+# BACKGROUND
+
+Cyclistic is a bike-share program that features more than 5,800 bicycles and 600 docking stations. Cyclistic sets itself apart by also offering reclining bikes, hand tricycles, and cargo bikes, making bike-share more inclusive to people with disabilities and riders who can’t use a standard two-wheeled bike. 
+
+As a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, our team wants to understand how casual riders and annual members use Cyclistic bikes differently. From these insights, we are tasked to design a new marketing strategy the company will use to convert casual riders into annual members. We need a strategy is not only easy and cost effective to implement, but also a strategy that will get the approval of the executive team.
+
+## Stakeholders:
+1. The director of marketing, Lily Moreno.
+
+2. Cyclistic marketing analytics team.
+
+3. Cyclistic executive team.
+
+
+# STEP 1: ASK?
+
+Business Task:
+1. How do annual members and casual riders use Cyclistic bikes differently?
+
+2. Why would casual riders buy Cyclistic annual memberships?
+
+3. How can Cyclistic use digital media to influence casual riders to become members?
+
+### Load packages required for project
+```{r}
+library(tidyverse)
+```
+
+# STEP 2: PREPARE DATA
+
+For this project, I will use the public data of Cyclistic’s historical trip data to analyze and identify trends. The data has been made available by Motivate International Inc. under the license.
+
+The company has provided me with monthly data for the last 12 months, which I downloaded directly from their website.The data is assumed to be credible since it was compiled and published by the organisation internally.
+
+The data is found to have consistent structure across all the 12 months, albeit with some data missing.The names of starting stations and ending stations for some months are missing, as the company wasn't collecting those data as of then. So we will rely on the coordinates for the starting staions and ending stations instead.
+
+### Read data files
+```{r}
+b_202106 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202106-divvy-tripdata.csv")
+b_202107 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202107-divvy-tripdata.csv")
+b_202108 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202108-divvy-tripdata.csv")
+b_202109 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202109-divvy-tripdata.csv")
+b_202110 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202110-divvy-tripdata.csv")
+b_202111 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202111-divvy-tripdata.csv")
+b_202112 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202112-divvy-tripdata.csv")
+b_202201 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202201-divvy-tripdata.csv")
+b_202202 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202202-divvy-tripdata.csv")
+b_202203 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202203-divvy-tripdata.csv")
+b_202204 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202204-divvy-tripdata.csv")
+b_202205 <- read_csv("E:/My Data Science Portfolio/Datasets/Bikeshare_Data/202205-divvy-tripdata.csv")
+```
+
+# STEP 3: PROCESS
+
+I started the process of data cleaning and processing in Excel, where I calculated the ride time for each trip in the data provided.I also joined the start station latitude and longitude into one string named start station coordinate, as well as the end station latitude and longitude and named it end station coordinate.
+
+## CREATE A SINGLE DATA FRAME
+
+### Join individual data frames into one single data frame
+```{r}
+bikes_full <- bind_rows(b_202106, b_202107, b_202108, b_202109, b_202110, b_202111, b_202112, b_202201, b_202202, b_202203, b_202204, b_202205)
+```
+
+### Check list of column names, number of columns and consistency in data frame
+```{r}
+colnames(bikes_full)
+str(bikes_full)
+```
+
+
+## CLEAN DATA AND FORMAT READY FOR ANALYSIS
+
+Now I will use R further process the data, check for bias and incomplete data, drop any data that is likely to skew the findings or make it hard to see trends as well as drop any duplicates.
+
+
+### Remove columns start latitude, start longitude, end latitude and end longitude which are merged to form start coordinate and end coordinate, and remove columns start station name, start station id, end station name, end station id because some of the data is missing in some files so it makes data inconsistent
+```{r}
+bikes_v1 <- subset(bikes_full, select = -c(start_lat, start_lng,  end_lat, end_lng, start_station_name, start_station_id,  end_station_name, end_station_id))
+```
+
+### Check Data Content by checking columns names and taking a glimpse of data
+```{r}
+colnames(bikes_v1)
+glimpse(bikes_v1)
+```
+
+### Change day from number to name of day of week and arrange to match calendar order
+```{r}
+bikes_v2 <-  bikes_v1 %>% mutate(day_of_week = recode(day_of_week, '1' = "Sunday", '2' = "Monday", '3' = "Tuesday", '4' = "Wednesday", '5' = "Thursday", '6' = "Friday", '7' = "Saturday"))
+
+bikes_v2$day_of_week <- ordered(bikes_v2$day_of_week, levels = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
+
+```
+
+
+### Check Data Content by taking a glimpse of data
+```{r}
+glimpse(bikes_v2)
+```
+
+# STEP 4: ANALYZE DATA BY RUNNING ANALYTICAL QUERIES
+
+
+### Check number of members by type
+```{r}
+rider <- table(bikes_v2$member_casual)
+rider
+```
+
+### Check the number of trips by Bike Type
+```{r}
+table(bikes_v2$rideable_type)
+```
+
+### Check the number of trips by Week Day
+```{r}
+table(bikes_v2$day_of_week)
+```
+
+### Check the number of trips by day by member type
+```{r}
+num_rides <- bikes_v2 %>% group_by(member_casual, day_of_week) %>% summarise(number_of_rides =n())
+num_rides
+```
+
+### Check the number of trips for casual during weekends 
+```{r}
+num_rides_casual_weekends <- nrow(filter(bikes_v2, member_casual == "casual" & (day_of_week == "Saturday" | day_of_week == "Sunday")))
+num_rides_casual_weekends
+```
+
+### Check the number of trips for members during weekends
+```{r}
+num_rides_member_weekends <- nrow(filter(bikes_v2, member_casual == "member" & (day_of_week == "Saturday" | day_of_week == "Sunday")))
+num_rides_member_weekends
+```
+
+### Check the number of trips for casual during weekdays
+```{r}
+num_rides_casual_weekdays <- nrow(filter(bikes_v2, member_casual == "casual" & !(day_of_week == "Saturday" | day_of_week == "Sunday")))
+num_rides_casual_weekdays
+```
+
+### Check the number of trips for members during weekdays
+```{r}
+num_rides_member_weekdays <- nrow(filter(bikes_v2, member_casual == "member" & !(day_of_week == "Saturday" | day_of_week == "Sunday")))
+num_rides_member_weekdays
+```
+
+### Check the ride length of trips and determine the length with maximum and minimum numbers of rides
+```{r}
+trips_by_length <- table(bikes_v2$ride_length)
+which.max(trips_by_length)
+max(trips_by_length)
+which.min(trips_by_length)
+min(trips_by_length)
+```
+
+### Check the Start point of trips and determine the point with maximum and minimum starting numbers of rides
+```{r}
+trips_by_start_point <- table(bikes_v2$start_coordinate)
+which.max(trips_by_start_point)
+max(trips_by_start_point)
+which.min(trips_by_start_point)
+min(trips_by_start_point)
+```
+
+### Check the End point of trips and determine the point with the maximum and minimum ending numbers of rides
+```{r}
+trips_by_end_point <- table(bikes_v2$end_coordinate)
+which.max(trips_by_end_point)
+max_end_point <- max(trips_by_end_point)
+which.min(trips_by_end_point)
+min_end_point <- min(trips_by_end_point)
+```
+
+# STEP 5: SHARE INSIGTHS AND VISUALS TO HIGLIGHT TRENDS AND RELATIONSHIPS
+
+## Visualize data to easily identify trends and relationships
+
+### Plot a pie chart to categorize member type
+```{r}
+pie(rider)
+```
+
+### Plot a bar chart to see activities of riders through the week
+```{r}
+ggplot(bikes_v2, aes(x= day_of_week)) + geom_bar()
+```
+
+### Plot a graph to differentiate how often members ride through the week
+```{r}
+ggplot(bikes_v2, aes(x= day_of_week, fill = member_casual)) + geom_bar(position = "dodge")
+```
+
+### Plot a graph to differentiate how often members ride through the week with different bike type
+```{r}
+ggplot(bikes_v2, aes(x= day_of_week, fill = rideable_type)) + geom_bar(position = "dodge")
+```
+
+## STEP 6: ACT
+
+Read the PowerPoint presentation attached for recommended acts.

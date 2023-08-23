@@ -1,0 +1,270 @@
+---
+title: "Wine Quality Classification"
+author: "Aliyu Atiku Mustapha"
+date: "18-08-2023"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 2
+    code_folding: hide
+---
+
+# The Data
+
+## Wine Quality Dataset
+
+The dataset consists of physicochemical (inputs) and sensory (the output) variables for two datasets, the red and white variants of the Portuguese "Vinho Verde" wine. the two data sets could be used for the analysis, but only one at a time.
+
+The dataset is available on [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/186/wine+quality).  The data has the following columns and their descriptions:
+
+| Column Name | Column Description 
+|--------- |--------- 
+| fixed.acidity    |  fixed acidity 
+| volatile.acidity    | volatile acidity
+| citric.acid    | citric acid
+| residual.sugar    | residual sugar
+| chlorides    | chlorides
+| free.sulfur.dioxide    | free sulfur dioxide
+| total.sulfur.dioxide    | total sulfur dioxide
+| density    | density
+| pH    | pH
+| sulphates    |  sulphates
+| alcohol    |  alcohol
+| quality     | quality (score between 0 and 10)
+
+```{r setup, warning=FALSE, message=FALSE}
+# Load tidyverse package analysis
+library(tidyverse)
+# Load corrplot package for correlation plot
+library(corrplot)
+# Load gridExtra package for combining plots
+library(gridExtra)
+# Load rsample package for sampling data
+library(rsample)
+# Load rpart package for Random Forest modeling
+library(rpart)
+# Load adabag package for AdaBoost modeling
+library(adabag)
+# Load DT package table display
+library(DT)
+# Load knitr package 
+library(knitr)
+# Set constant size for plots
+knitr::opts_chunk$set(fig.width = 10, fig.height = 6)
+```
+
+
+## Data Loading
+```{r, read_files, message=FALSE, warning=FALSE}
+# Read the red wine data
+wine_data <- read.csv("E:/My Data Science Portfolio/Datasets/winequality-red.csv", sep = ";")
+# Read the white wine data
+# wine_data <- read.csv("Data_files/winequality-white.csv", sep = ";")
+# Number of total rows in data
+cat("The wine dataset has",nrow(wine_data), "rows.")
+# Display the first 500 rows of imported data
+datatable(
+  wine_data[1:500,],
+  options = list(pageLength = 20),
+  caption = "The first 500 rows of loaded data.",
+  fillContainer = T)
+```
+
+## Data Properties
+
+To understand the data composition, the class of each variable together with
+the number and proportion of missing values for each variable will provide a 
+deeper insight to the data structure and how it could be useful for analysis.
+
+```{r data_str, warning=FALSE, message=FALSE}
+# Check for class of each variable
+class_data <- sapply(wine_data, class)
+data_table <- data.frame(
+  Class = as.character(class_data),
+  Missing = colSums(is.na(wine_data)),
+  stringsAsFactors = FALSE)
+# Display the properties of the data
+datatable(data_table,
+      options = list(pageLength = 12),
+      caption = "Table displaying the properties of the data.")
+```
+
+The data has no missing values and all variables are in the right format for analysis.
+
+# Data Distribution
+
+This step is to take a look at the distribution of all the variables in the data.
+
+```{r, data_dist, message=FALSE, warning=FALSE}
+# Analyze the distribution of fixed.acidity
+d1 <- ggplot(wine_data, aes(x = fixed.acidity)) +
+        geom_histogram(binwidth = 1) +
+        labs(title = "Distribution of Fixed Acidity in Wine", 
+             x = "Fixed Acidity", y = "Count")
+# Analyze the distribution of volatile.acidity
+d2 <- ggplot(wine_data, aes(x = volatile.acidity)) +
+        geom_histogram() +
+        labs(title = "Distribution of Volatile Acidity in Wine", 
+             x = "Volatile Acidity", y = "Count")
+# Analyze the distribution of citric.acid
+d3 <- ggplot(wine_data, aes(x = citric.acid)) +
+        geom_histogram() +
+        labs(title = "Distribution of Citric Acid in Wine", 
+             x = "Citric Acid", y = "Count")
+# Analyze the distribution of residual.sugar
+d4 <- ggplot(wine_data, aes(x = residual.sugar)) +
+        geom_histogram() +
+        labs(title = "Distribution of Residual Sugar in Wine", 
+             x = "Residual Sugar", y = "Count")
+# Analyze the distribution of chlorides
+d5 <- ggplot(wine_data, aes(x = chlorides)) +
+        geom_histogram() +
+        labs(title = "Distribution of Chlorides in Wine", 
+             x = "Chlorides", y = "Count")
+# Analyze the distribution of free.sulfur.dioxide
+d6 <- ggplot(wine_data, aes(x = free.sulfur.dioxide)) +
+        geom_histogram() +
+        labs(title = "Distribution of Free Sulfur Dioxide in Wine", 
+             x = "Free Sulfur Dioxide", y = "Count")
+# Analyze the distribution of total.sulfur.dioxide
+d7 <- ggplot(wine_data, aes(x = total.sulfur.dioxide)) +
+        geom_histogram() +
+        labs(title = "Distribution of Total Sulfur Dioxide in Wine", 
+             x = "Total Sulfur Dioxide", y = "Count")
+# Analyze the distribution of density
+d8 <- ggplot(wine_data, aes(x = density)) +
+        geom_histogram() +
+        labs(title = "Distribution of Density of Wine", 
+             x = "Density", y = "Count")
+# Analyze the distribution of pH
+d9 <- ggplot(wine_data, aes(x = pH)) +
+        geom_histogram() +
+        labs(title = "Distribution of pH in Wine", 
+             x = "pH Level", y = "Count")
+# Analyze the distribution of sulphates
+d10 <- ggplot(wine_data, aes(x = sulphates)) +
+        geom_histogram() +
+        labs(title = "Distribution of Sulphates in Wine", 
+             x = "Sulphates", y = "Count")
+# Analyze the distribution of alcohol
+d11 <- ggplot(wine_data, aes(x = alcohol)) +
+        geom_histogram() +
+        labs(title = "Distribution of Alcohol in Wine", 
+             x = "Alcohol", y = "Count")
+# Analyze the distribution of quality
+d12 <- ggplot(wine_data, aes(x = quality)) +
+        geom_histogram() +
+        labs(title = "Distribution of Quality in Wine", 
+             x = "Quality", y = "Count")
+# Print charts
+grid.arrange(d1, d2, d3, d4, d5, d6, ncol = 2)
+grid.arrange(d7, d8, d9, d10, d11, d12, 
+             ncol = 2)
+```
+
+# Classification Modeling
+
+## Feature Analysis
+
+Identify relevant features for classification using correlation.
+
+```{r corr_mat, warning=FALSE, message=FALSE}
+# Correlation matrix
+cor_matrix <- cor(wine_data)
+corrplot(cor_matrix, 
+         method = "color",
+         addCoef.col = "black", tl.col = "red")
+```
+
+Notice that 'quality' has very low correlations with some of the variables. This doesn't necessarily imply that 'quality' has no relationship with those variables, but those relationships maybe non-linear.
+
+## Split data into training and testing sets
+
+```{r split_data, message=FALSE, warning=FALSE}
+# Set seed for reproducibility
+set.seed(123)
+# Split data, 70% for training, 30% for testing
+wine_split <-
+  initial_split(wine_data, prop = 0.7, strata = quality)
+train_data <- training(wine_split)
+test_data <- testing(wine_split)
+```
+
+Now that the data has been split into a training data containing approximately 70% of the data and test data containing approximately 30% of the data, next is to build some models using these split data.
+
+## RandomForest Model
+
+```{r, random_forest, message=FALSE, warning=FALSE}
+# Build a Random Forest model for classification
+rf_model <- rpart(quality ~ ., 
+                    data = train_data)
+# Predict with RF Model using test data
+rf_predictions <- predict(rf_model, 
+                       newdata  = test_data)
+# Evaluate model performance using a confusion matrix
+rf_confusion_matrix <- table(rf_predictions, test_data$quality)
+# Calculate accuracy = True Positives / (All Observations)
+accuracy <- sum(diag(rf_confusion_matrix)) / sum(rf_confusion_matrix)
+# Calculate Precision = True Positives / (True Positives + False Positives)
+precision <- rf_confusion_matrix[2, 2] / sum(rf_confusion_matrix[, 2])
+# Calculate Recall = True Positives / (True Positives + False Negatives)
+recall <- rf_confusion_matrix[2, 2] / sum(rf_confusion_matrix[2, ])
+# Print the model performance measurement metrics
+cat(
+  "Random Forest Model Performance::\n",
+  "Accuracy: ", round(accuracy * 100, 3), "%", "\n",
+  "Precision: ", round(precision * 100, 3), "%", "\n",
+  "Recall: ", round(recall * 100, 3), "%"
+)
+```
+
+The 'Accuracy', 'Precision' and 'Recall' are pretty low. Lets try another classification model to see if an improvement can be found.
+
+## AdaBoost Ensemble Model
+
+AdaBoost is an ensemble learning algorithm that combines multiple weak learners to create a strong classifier, which is why I consider using it because the RandomForest model showed weak results, so an ensemble method might be a good way to get better results.
+
+```{r, ada_boost, message=FALSE, warning=FALSE}
+# Convert quality to a binary factor (Good or Not Good, based on a threshold)
+# Set the threshold for "Good" quality
+threshold <- 6
+train_data$quality <- as.factor(ifelse(train_data$quality >= threshold, "Good", "NotGood"))
+test_data$quality <- as.factor(ifelse(test_data$quality >= threshold, "Good", "NotGood"))
+# Build the Logistic Regression Model using glmnet
+adaboost_model <- boosting(formula = quality ~ .,
+                           data = train_data,
+                           mfinal = 100)
+# Predict with the AdaBoost Model using test data
+adaboost_predictions <- predict(adaboost_model, newdata = test_data[, -12])
+# Calculate Confusion Matrix
+adaboost_confusion_matrix  <-
+  table(adaboost_predictions$class, test_data$quality)
+# Calculate accuracy = True Positives / (All Observations)
+accuracy2 <-
+  sum(diag(adaboost_confusion_matrix)) / sum(adaboost_confusion_matrix)
+# Calculate Precision = True Positives / (True Positives + False Positives)
+precision2 <-
+  adaboost_confusion_matrix[2, 2] / sum(adaboost_confusion_matrix[, 2])
+# Calculate Recall = True Positives / (True Positives + False Negatives)
+recall2 <- adaboost_confusion_matrix[2, 2] / sum(adaboost_confusion_matrix[2, ])
+# Print the model performance measurement metrics
+cat(
+  "AdaBoost Model Performance:\n",
+  "Accuracy:", round(accuracy2 * 100, 3), "%", "\n",
+  "Precision:", round(precision2 * 100, 3), "%", "\n",
+  "Recall:", round(recall2 * 100, 3), "%"
+)
+```
+
+The 'Accuracy', 'Precision' and 'Recall' are quite good, which indicates for this task, an ensemble model is the best approach.
+
+# Conclusion
+
+1. It might be possible to increase the 'Accuracy', 'Precision' and 'Recall' of the RandomForest model through hyper-parameter tuning. This will enable the efficient use of the parameters in the RandomForest model.
+
+2. The ensemble model, AdaBoost model, produced good result 'Accuracy', 'Precision' and 'Recall' but there might be still room for improvement. This could also be improved using hyper-parameter tuning or more feature engineering such as PCA or scaling.
+
+3. Both the red-wine and white-wine data sets showed tremendous improvement using the ensembled model compared to the RandomForests model, which indicates this might be the best model for this task.
