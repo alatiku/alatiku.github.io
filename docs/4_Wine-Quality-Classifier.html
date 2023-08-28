@@ -346,9 +346,15 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
 </li>
-<li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
   <a href="1a_Cyclistic.html">Google Data Analytics-I</a>
 </li>
 <li>
@@ -363,9 +369,6 @@ div.tocify {
 <li>
   <a href="4_Wine-Quality-Classifier.html">Classification Modeling</a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -484,7 +487,7 @@ knitr::opts_chunk$set(fig.width = 10, fig.height = 6)</code></pre>
 <pre class="r"><code># Read the red wine data
 wine_data &lt;- read.csv(&quot;E:/My Data Science Portfolio/Datasets/winequality-red.csv&quot;, sep = &quot;;&quot;)
 # Read the white wine data
-# wine_data &lt;- read.csv(&quot;Data_files/winequality-white.csv&quot;, sep = &quot;;&quot;)
+# wine_data &lt;- read.csv(&quot;E:/My Data Science Portfolio/Datasets/winequality-white.csv&quot;, sep = &quot;;&quot;)
 # Number of total rows in data
 cat(&quot;The wine dataset has&quot;,nrow(wine_data), &quot;rows.&quot;)</code></pre>
 <pre><code>## The wine dataset has 1599 rows.</code></pre>
@@ -700,10 +703,10 @@ indicates for this task, an ensemble model is the best approach.</p>
 ‘Recall’ of the RandomForest model through hyper-parameter tuning. This
 will enable the efficient use of the parameters in the RandomForest
 model.</p></li>
-<li><p>The ensemble model, AdaBoost model, produced good result
-‘Accuracy’, ‘Precision’ and ‘Recall’ but there might be still room for
-improvement. This could also be improved using hyper-parameter tuning or
-more feature engineering such as PCA or scaling.</p></li>
+<li><p>The ensemble model, AdaBoost model, produced good ‘Accuracy’,
+‘Precision’ and ‘Recall’ but there might be still room for improvement.
+This could also be improved using hyper-parameter tuning or more feature
+engineering such as PCA or scaling.</p></li>
 <li><p>Both the red-wine and white-wine data sets showed tremendous
 improvement using the ensembled model compared to the RandomForests
 model, which indicates this might be the best model for this

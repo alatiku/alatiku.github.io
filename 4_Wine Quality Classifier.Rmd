@@ -62,7 +62,7 @@ knitr::opts_chunk$set(fig.width = 10, fig.height = 6)
 # Read the red wine data
 wine_data <- read.csv("E:/My Data Science Portfolio/Datasets/winequality-red.csv", sep = ";")
 # Read the white wine data
-# wine_data <- read.csv("Data_files/winequality-white.csv", sep = ";")
+# wine_data <- read.csv("E:/My Data Science Portfolio/Datasets/winequality-white.csv", sep = ";")
 # Number of total rows in data
 cat("The wine dataset has",nrow(wine_data), "rows.")
 # Display the first 500 rows of imported data
@@ -265,6 +265,6 @@ The 'Accuracy', 'Precision' and 'Recall' are quite good, which indicates for thi
 
 1. It might be possible to increase the 'Accuracy', 'Precision' and 'Recall' of the RandomForest model through hyper-parameter tuning. This will enable the efficient use of the parameters in the RandomForest model.
 
-2. The ensemble model, AdaBoost model, produced good result 'Accuracy', 'Precision' and 'Recall' but there might be still room for improvement. This could also be improved using hyper-parameter tuning or more feature engineering such as PCA or scaling.
+2. The ensemble model, AdaBoost model, produced good 'Accuracy', 'Precision' and 'Recall' but there might be still room for improvement. This could also be improved using hyper-parameter tuning or more feature engineering such as PCA or scaling.
 
 3. Both the red-wine and white-wine data sets showed tremendous improvement using the ensembled model compared to the RandomForests model, which indicates this might be the best model for this task.

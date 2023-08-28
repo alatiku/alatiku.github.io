@@ -7,7 +7,9 @@ navbar:
     - icon: fa-linkedin fa-lg
       href: https://www.linkedin.com/in/aliyu-atiku
     - text: "Home"
+      icon: fa-home
       href: index.html
+  right:
     - text: "Google Data Analytics-I"
       href: 1a_Cyclistic.html
     - text: "Google Data Analytics-II"
