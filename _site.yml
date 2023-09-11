@@ -20,4 +20,6 @@ navbar:
       href: 3_churn.html
     - text: "Classification Modeling"
       href: 4_Wine-Quality-Classifier.html
+    - text: "Airline Delay Prediction"
+      href: 5_Airline_Delay_Prediction.html
 output_dir: "docs"
