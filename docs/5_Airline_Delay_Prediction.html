@@ -684,10 +684,10 @@ airline_data %&gt;%
     aes(y = Total_flights, label = paste0(prop_delayed, &quot;%&quot;)),
     position = position_dodge(width = 1),
     vjust = -0.3,
-    angle = 45) +
+    size = 2.5) +
   labs(x = &quot;Departure Airport&quot;, y = &quot;Count&quot;, 
        title = &quot;Total Flights vs. Delayed Flights by Departure Airport&quot;,
-       subtitle = &quot;Will my flight depart on time?&quot;) +
+       subtitle = &quot;Will my flight be delayed?&quot;) +
   scale_fill_manual(
     values = c(&quot;Total_flights&quot; = &quot;blue&quot;,
                &quot;delayed_flights&quot; = &quot;red&quot;),
@@ -721,10 +721,10 @@ airline_data %&gt;%
     aes(y = Total_flights, label = paste0(prop_delayed, &quot;%&quot;)),
     position = position_dodge(width = 1), 
     vjust = -0.3,
-    angle = 45) +
+    size = 2.5) +
   labs(x = &quot;Arrival Airport&quot;, y = &quot;Count&quot;, 
        title = &quot;Total Flights vs. Delayed Flights by Arrival Airport&quot;,
-       subtitle = &quot;Will my flight arrive on time?&quot;) +
+       subtitle = &quot;Will my flight arrive late?&quot;) +
   scale_fill_manual(
     values = c(&quot;Total_flights&quot; = &quot;blue&quot;, 
                &quot;delayed_flights&quot; = &quot;red&quot;),

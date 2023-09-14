@@ -197,10 +197,10 @@ airline_data %>%
     aes(y = Total_flights, label = paste0(prop_delayed, "%")),
     position = position_dodge(width = 1),
     vjust = -0.3,
-    angle = 45) +
+    size = 2.5) +
   labs(x = "Departure Airport", y = "Count", 
        title = "Total Flights vs. Delayed Flights by Departure Airport",
-       subtitle = "Will my flight depart on time?") +
+       subtitle = "Will my flight be delayed?") +
   scale_fill_manual(
     values = c("Total_flights" = "blue",
                "delayed_flights" = "red"),
@@ -234,10 +234,10 @@ airline_data %>%
     aes(y = Total_flights, label = paste0(prop_delayed, "%")),
     position = position_dodge(width = 1), 
     vjust = -0.3,
-    angle = 45) +
+    size = 2.5) +
   labs(x = "Arrival Airport", y = "Count", 
        title = "Total Flights vs. Delayed Flights by Arrival Airport",
-       subtitle = "Will my flight arrive on time?") +
+       subtitle = "Will my flight arrive late?") +
   scale_fill_manual(
     values = c("Total_flights" = "blue", 
                "delayed_flights" = "red"),
