@@ -12,11 +12,9 @@ output:
     code_folding: hide
 ---
 
-# Introduction
+### This capstone project is for the Google Data Analytics course.
 
-## This capstone project is for the Google Data Analytics course.
-
-### After dedicatting a year refining my R skills through immersive courses, notably on DataCamp. In July 2023, I revisited the Cyclistic project to apply my enhanced abilities.
+#### After dedicatting a year refining my R skills through immersive courses, notably on DataCamp. In July 2023, I revisited the Cyclistic project to apply my enhanced abilities.
 
 This case study focuses on analyzing the bike-share program of Cyclistic, a
 company in Chicago, with the goal of understanding the differences between
@@ -25,7 +23,7 @@ strategy to convert casual riders into annual members. The analysis will
 leverage Cyclistic's historical trip data and explore various trends and
 patterns.
 
-# Stakeholders
+Stakeholders
 
 1. Lily Moreno - Director of Marketing
 
@@ -33,13 +31,13 @@ patterns.
 
 3. Cyclistic Executive Team
 
-# Business Questions
+Business Questions
 
 How do annual members and casual riders use Cyclistic bikes differently? Why
 would casual riders buy Cyclistic annual memberships? How can Cyclistic use
 digital media to influence casual riders to become members?
 
-# Data 
+## Data 
 
 The data used in this analysis was sourced from the company's [Cyclistic’s historical trip data](https://divvy-tripdata.s3.amazonaws.com/index.html). 
 The data consists of 1 year usage history between the months of June 2021 and 
@@ -64,7 +62,7 @@ May 2022. The data consists of 5,860,776 rows and 13 Columns as listed below:
 | end_lng    | Longitude ride ended at
 | member_casual    | Membership type of rider
 
-## Data Preparation
+### Data Preparation
 
 ```{r, setup, message=FALSE, warning=FALSE}
 # Load tidyverse package
@@ -98,13 +96,13 @@ cat("The bikeshare dataset has",nrow(bikes_full), "rows.")
 # Display the first 100 rows of imported data
 datatable(
   bikes_full[1:100,],
-  options = list(pageLength = 20),
+  options = list(pageLength = 20, scrollx = '10in', scrollY = '4in'),
   caption = "The first 100 rows of loaded data.",
-  fillContainer = T)
+  fillContainer = TRUE)
 
 ```
 
-## Data Properties
+### Data Properties
 
 To understand the data composition, the class of each variable together with
 the number and proportion of missing values for each variable will provide a 
@@ -171,12 +169,12 @@ bikes_cleaned <- bikes_full %>%
 # # Display the first 100 rows of cleaned data
 # datatable(
 #   bikes_cleaned[1:100,],
-#   options = list(pageLength = 20),
+#   options = list(pageLength = 20, scrollx = '10in', scrollY = '4in'),
 #   caption = "The first 100 rows of cleaned and transformed data.",
-#   fillContainer = T)
+#   fillContainer = TRUE)
 ```
 
-# Analysis
+## Analysis
 
 To highlight trends and relationships in the data, we can create visualizations.
 
@@ -337,7 +335,7 @@ bikes_cleaned %>%
 
 Overall, casual riders tend to ride for longer compared to members.
 
-# Limitations on analysis
+## Limitations of analysis
 
 The analysis of the bike data was hindered by missing data and information. 
 Several columns, including start station names, end station, and station IDs, contained missing data, impacting the accuracy of the findings. Moreover, the absence of age and gender information for the riders limited the understanding 
@@ -347,7 +345,7 @@ different demographic groups.
 To address these issues in future research, techniques for imputing missing data could be applied, and efforts to collect additional data on age and gender information should be implemented. By mitigating these limitations, future 
 analyses would offer more comprehensive insights into bike usage and enable more effective targeting strategies based on demographic characteristics.
 
-# Recommendations
+## Recommendations
 
 1. Run specific campaigns targeting casual riders at the stations during 
 weekends, and evening peak periods during the weekdays.

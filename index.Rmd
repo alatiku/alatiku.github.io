@@ -3,7 +3,8 @@ title: "About Me"
 output: html_document
 ---
 
-![SQL](https://img.shields.io/badge/-SQL-purple)
+![SQL](https://img.shields.io/badge/-SQL-green)
+![Python](https://img.shields.io/badge/-Python-purple)
 ![R](https://img.shields.io/badge/-R-blue)
 ![Spark](https://img.shields.io/badge/-Spark-orange)
 ![Shiny](https://img.shields.io/badge/-Shiny-skyblue)
@@ -24,8 +25,7 @@ in data exploration and extracting valuable insights. Hungry for more knowledge,
 I pursued additional classes specializing in leveraging the power of R for data
 analysis. As my proficiency in R grew, I found myself increasingly captivated by
 the intersection of data science and machine learning. Motivated by this new
-found interest, I am currently expanding my horizons growing expertise in SQL,
-R, Power BI and Tableau to prepare me tackle complex data science challenges.
+found interest, I am currently expanding my expertise in python, with emphasis on machine learning.
 
 As I embark on this career transition, my main objective is to apply my growing
 skills to data from the real world. I am motivated to use data science tools to

@@ -10,15 +10,13 @@ navbar:
       icon: fa-home
       href: index.html
   right:
-    - text: "Google Data Analytics-I"
-      href: 1a_Cyclistic.html
-    - text: "Google Data Analytics-II"
+    - text: "Google Data Analytics"
       href: 1b_Cyclistic_Improved.html
-    - text: "Sentiment Analysis"
+    - text: "Review Sentiment Analysis"
       href: 2_sentiment_analysis.html
-    - text: "Churn Analysis"
+    - text: "Telco Churn Analysis"
       href: 3_churn.html
-    - text: "Classification Modeling"
+    - text: "Wine Quality Classifier"
       href: 4_Wine-Quality-Classifier.html
     - text: "Airline Delay Prediction"
       href: 5_Airline_Delay_Prediction.html

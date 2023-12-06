@@ -26,8 +26,6 @@ Customer Churn - IBM Dataset.
 
 5. Can we predict which customers are likely to churn in the near future?
 
-# The Data
-
 ## Telco Customer Churn: IBM Dataset
 
 The data is from a fictional telco company that provided home phone and Internet services to 7043 customers in California in Q3
@@ -101,7 +99,7 @@ library(DT)
 library(knitr)
 ```
 
-## Load Telco Data
+### Load Telco Data
 
 ```{r, read_data_file, message=FALSE, warning=FALSE}
 # load the data set
@@ -111,12 +109,12 @@ cat("The Telco dataset has",nrow(telco_data), "rows.")
 # Display the first 500 rows of imported data
 datatable(
   telco_data[1:500,],
-  options = list(pageLength = 20),
+  options = list(pageLength = 20, scrollx = '10in', scrollY = '4in'),
   caption = "The first 500 rows of loaded data.",
-  fillContainer = T)
+  fillContainer = TRUE)
 ```
 
-## Data Properties
+### Data Properties
 
 To understand the data composition, the class of each variable together with
 the number and proportion of missing values for each variable will provide a 
@@ -141,9 +139,9 @@ properties <- cbind(class_table,
 # Display the properties of the data
 datatable(
   properties,
-  options = list(pageLength = 35),
+  options = list(pageLength = 35, scrollx = '10in', scrollY = '4in'),
   caption = "Table displaying the properties of data.",
-  fillContainer = T)
+  fillContainer = TRUE)
 ```
 
 Note: Data has 2 variables with missing values. 
@@ -208,14 +206,14 @@ telco_cleaned[bin_variable] <-
 # Display the first 500 rows of cleaned data
 datatable(
   telco_cleaned[1:500,],
-  options = list(pageLength = 20),
+  options = list(pageLength = 20, scrollx = '10in', scrollY = '4in'),
   caption = "The first 500 rows of cleaned data with reduced variables.",
-  fillContainer = T)
+  fillContainer = TRUE)
 ```
 
-# Analysis
+## Analysis
 
-## 1. What are the main factors contributing to customer churn?
+### 1. What are the main factors contributing to customer churn?
 
 Find out the proportion of overall customers that churn, and high value
 customers that churn.
@@ -282,7 +280,7 @@ The Random Forest model provides insight to those variables that contribute
 to customer churn. The model allows us to focus on and analyze some of these key
 predictors that strongly influence customer churn.
 
-## 2. Can we identify patterns or behaviors that precede customer churn?
+### 2. Can we identify patterns or behaviors that precede customer churn?
 
 To do that, the data needs to only include churned customers, then further analysis could identify which factors are unique to them. Specifically, we look at those variable that are high on the random forest model.
 
@@ -294,7 +292,7 @@ churned_customers <- telco_cleaned %>%
 d1 <- ggplot(churned_customers, aes(x = Contract, fill = Contract)) +
         geom_bar() +
         labs(title = "Contract Type for Churned Customers", 
-             x = "Contract", y = "Count") +
+             x = "Contract", y = "Number of Customers") +
         theme(legend.position = "none")
 # Analyze Tenure Months by churn
 d2 <- ggplot(churned_customers, aes(x = Tenure_Months)) +
@@ -302,20 +300,20 @@ d2 <- ggplot(churned_customers, aes(x = Tenure_Months)) +
                        fill = "blue",
                        color = "black") +
         labs(title = "Tenure Distribution for Churned Customers",
-             x = "Tenure in Months", y = "Count")
+             x = "Tenure in Months", y = "Number of Customers")
 # Analyze Internet Service Type by churn
 d3 <- ggplot(churned_customers,
              aes(x = Internet_Service, fill = Internet_Service)) +
         geom_bar() +
         labs(title = "Internet Service Type for Churned Customers", 
-             x = "Internet Service", y = "Count") +
+             x = "Internet Service", y = "Number of Customers") +
         theme(legend.position = "none")
 # Analyze Payment Method Type by churn
 d4 <- ggplot(churned_customers,
        aes(x = Payment_Method, fill = Payment_Method)) +
     geom_bar() +
     labs(title = "Payment Method Type for Churned Customers", 
-         x = "Payment Method", y = "Count") +
+         x = "Payment Method", y = "Number of Customers") +
     scale_x_discrete(labels=c("Bank Transfer\n(automatic)", 
                                 "Credit Card\n(automatic)",
                                 "Electronic Check",
@@ -328,7 +326,7 @@ grid.arrange(d1, d2, d3, d4, ncol = 2)
 Looking at the charts above, we can deduce that most customers who churn have a month-to-month contract and tend to stay for short periods because the tenure distribution is right-skewed, they also subscribed to the fibre-optic internet service and chose to pay by electronic check. 
 These are certainly behaviors that could be used to track churning.
 
-## 3. Which customer segments have the highest churn rates?
+### 3. Which customer segments have the highest churn rates?
 
 Analyse the demography of churned customers by segmenting to look at the gender,
 those classified as senior citizens and those living with partners and
@@ -411,7 +409,7 @@ those living without dependents or partners are more likely to churn. Efforts to
 retain more senior citizens and those living without any dependents or partners
 should be the focus.
 
-## 4. Are there specific products or services associated with higher churn rates?
+### 4. Are there specific products or services associated with higher churn rates?
 
 It is time to look at the churn rates for specific services, to find any
 patterns.
@@ -579,7 +577,7 @@ don't subscribe to have Online Security, tech support and those that subscribe
 to have paperless billing are more likely to churn.
 By addressing customer pain points associated with these services, the rate of churn could be reduced overall, as well as increasing customer satisfaction.
 
-## 5. Can we predict which customers are likely to churn in the near future?
+### 5. Can we predict which customers are likely to churn in the near future?
 
 This would involve building machine learning algorithms that could help predict customers that would churn. Due to nature of the data, a logistic regression model and a classification decision tree model will be built and evaluated to select the best among the two.
 
@@ -667,7 +665,7 @@ Recall of `r paste0(round(recall2, 3) * 100)`%, which all indicate a poor and un
 
 #### Therefore, in order to predict which customers will churn in the future, the logistic regression model is the model of choice.
 
-# Limitations
+## Limitations
 
 1. The analysis couldn't consider the customer reasons for churning due to the high proportion of missing values for that variable, and as such, the insights into the specific motivations or pain points driving churn remain limited. This missing information could potentially lead to an incomplete understanding of the underlying factors contributing to customer attrition and might hinder the development of targeted strategies to address these issues effectively.
 
@@ -679,7 +677,7 @@ other factors could be responsible for churn. For example, the data does not con
 data distribution and relationships, and any violation of these assumptions
 could affect the validity of the analysis.
 
-# Conclusion
+## Conclusion
 
 1. It is important to improve customer retention strategies that target the
 specific customers with high churn rate through personalized communication,

@@ -1,7 +1,7 @@
 ---
 title: "Wine Quality Classification"
 author: "Aliyu Atiku Mustapha"
-date: "18-08-2023"
+date: "2023-08-18"
 output:
   html_document:
     toc: true
@@ -12,11 +12,9 @@ output:
     code_folding: hide
 ---
 
-# The Data
-
 ## Wine Quality Dataset
 
-The dataset consists of physicochemical (inputs) and sensory (the output) variables for two datasets, the red and white variants of the Portuguese "Vinho Verde" wine. the two data sets could be used for the analysis, but only one at a time.
+The dataset consists of physicochemical (inputs) and sensory (the output) variables for two datasets, the red and white variants of the Portuguese "Vinho Verde" wine. The two data sets could be used for the analysis, but only one at a time.
 
 The dataset is available on [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/186/wine+quality).  The data has the following columns and their descriptions:
 
@@ -56,8 +54,8 @@ library(knitr)
 knitr::opts_chunk$set(fig.width = 10, fig.height = 6)
 ```
 
+### Data Loading
 
-## Data Loading
 ```{r, read_files, message=FALSE, warning=FALSE}
 # Read the red wine data
 wine_data <- read.csv("E:/My Data Science Portfolio/Datasets/winequality-red.csv", sep = ";")
@@ -68,12 +66,12 @@ cat("The wine dataset has",nrow(wine_data), "rows.")
 # Display the first 500 rows of imported data
 datatable(
   wine_data[1:500,],
-  options = list(pageLength = 20),
+  options = list(pageLength = 20, scrollx = '10in', scrollY = '4in'),
   caption = "The first 500 rows of loaded data.",
-  fillContainer = T)
+  fillContainer = TRUE)
 ```
 
-## Data Properties
+### Data Properties
 
 To understand the data composition, the class of each variable together with
 the number and proportion of missing values for each variable will provide a 
@@ -94,7 +92,7 @@ datatable(data_table,
 
 The data has no missing values and all variables are in the right format for analysis.
 
-# Data Distribution
+### Data Distribution
 
 This step is to take a look at the distribution of all the variables in the data.
 
@@ -165,9 +163,9 @@ grid.arrange(d7, d8, d9, d10, d11, d12,
              ncol = 2)
 ```
 
-# Classification Modeling
+## Classification Modeling
 
-## Feature Analysis
+### Feature Analysis
 
 Identify relevant features for classification using correlation.
 
@@ -181,7 +179,7 @@ corrplot(cor_matrix,
 
 Notice that 'quality' has very low correlations with some of the variables. This doesn't necessarily imply that 'quality' has no relationship with those variables, but those relationships maybe non-linear.
 
-## Split data into training and testing sets
+### Split data into training and testing sets
 
 ```{r split_data, message=FALSE, warning=FALSE}
 # Set seed for reproducibility
@@ -261,7 +259,7 @@ cat(
 
 The 'Accuracy', 'Precision' and 'Recall' are quite good, which indicates for this task, an ensemble model is the best approach.
 
-# Conclusion
+## Conclusion
 
 1. It might be possible to increase the 'Accuracy', 'Precision' and 'Recall' of the RandomForest model through hyper-parameter tuning. This will enable the efficient use of the parameters in the RandomForest model.
 

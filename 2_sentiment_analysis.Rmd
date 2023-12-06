@@ -11,7 +11,7 @@ output:
     toc_depth: 2
     code_folding: hide
 ---
-# Analysis Objectives
+## Analysis Objectives
 
 The purpose of this analysis is to answer 5 business questions using the Amazon
 Fine Food Reviews Data.
@@ -26,8 +26,6 @@ negative reviews?
 4. Do certain review lengths tend to have more positive or negative sentiment?
 
 5. How does the sentiment differ between different user ratings (e.g., 1-star, 5-star)?
-
-# The Data
 
 ## Amazon Fine Food Reviews Data
 
@@ -74,7 +72,7 @@ knitr::opts_chunk$set(fig.width = 10, fig.height = 6)
 ```
 
 
-## Data Loading
+### Data Loading
 ```{r, read_files, message=FALSE, warning=FALSE}
 amzn_data <- read_csv("E:/My Data Science Portfolio/Datasets/Reviews.csv")
 # Number of total rows in data
@@ -82,12 +80,12 @@ cat("The review dataset has",nrow(amzn_data), "rows.")
 # Display the first 500 rows of imported data
 datatable(
   amzn_data[1:500,],
-  options = list(pageLength = 20),
+  options = list(pageLength = 20, scrollx = '10in', scrollY = '4in'),
   caption = "The first 500 rows of loaded data.",
-  fillContainer = T)
+  fillContainer = TRUE)
 ```
 
-## Data Properties
+### Data Properties
 
 To understand the data composition, the class of each variable together with
 the number and proportion of missing values for each variable will provide a 
@@ -110,9 +108,9 @@ properties <- cbind(class_table,
 # Display the properties of the data
 datatable(
   properties,
-  options = list(pageLength = 10),
+  options = list(pageLength = 10, scrollx = '10in', scrollY = '4in'),
   caption = "Table displaying the properties of the data.",
-  fillContainer = T)
+  fillContainer = TRUE)
 ```
 
 Note: Data has no missing values.
@@ -144,14 +142,14 @@ amzn_cleaned$Text <-
 # Display the first 240 rows of the cleaned and reformatted data
 datatable(
    amzn_cleaned[1:240,],
-   options = list(pageLength = 10),
+   options = list(pageLength = 10, scrollx = '10in', scrollY = '4in'),
    caption = "First 240 rows of cleaned data with new created variables.",
-   fillContainer = T)
+   fillContainer = TRUE)
 ```
 
-# Analysis
+## Analysis
 
-## 1. What is the overall sentiment distribution of the reviews?
+### 1. What is the overall sentiment distribution of the reviews?
 
 ```{r, sent_analysis1, message=FALSE, warning=FALSE}
 # Classify sentiment based on the customer 'Score'. Score above 3 are positive, scores below 3 are negative and scores that are 3 are neutral
@@ -170,7 +168,7 @@ ggplot(sentiment_counts, aes(x = Sentiment, y = Count, fill = Sentiment)) + geom
                                 "neutral" = "blue",
                                 "positive" = "green")) + 
   labs(title = "Sentiment Distribution", 
-       x = "Sentiment type", y = "Count")  +
+       x = "Sentiment type", y = "Number of Reviews")  +
   theme(legend.position = "top",
         legend.title = element_blank(),
         legend.text = element_text(size = 12))
@@ -179,7 +177,7 @@ ggplot(sentiment_counts, aes(x = Sentiment, y = Count, fill = Sentiment)) + geom
 The overall sentiment distribution shows that there are more positive reviews
 in the data set.
 
-## 2. How does the sentiment change over time?
+### 2. How does the sentiment change over time?
 
 ```{r, sent_analysis2, message=FALSE, warning=FALSE}
 # Monthly sentiment distribution
@@ -210,7 +208,7 @@ rise in positive reviews in the 2nd and 4th quarters of the year, and a downward
 trend during the the first quarter. While the negative reviews show a rise
 during the last quarter and a decline during the first quarter.
 
-## 3. Are there any specific products that consistently receive positive/negative reviews?
+### 3. Are there any specific products that consistently receive positive/negative reviews?
 
 ```{r, sent_analysis3, message=FALSE, warning=FALSE}
 # Group reviews by product and calculate sentiment distribution
@@ -224,9 +222,9 @@ consistently_positive <- product_sentiment %>%
 # Display top 1000 ProductIDs with the highest positive reviews
 datatable(
   consistently_positive[1:1000,],
-  options = list(pageLength = 10),
+  options = list(pageLength = 10, scrollx = '10in', scrollY = '4in'),
   caption = "First 1000 rows of ProductIDs with highest positive reviews.",
-   fillContainer = T)
+   fillContainer = TRUE)
 # Filter products with only Negative sentiment
 consistently_negative <- product_sentiment %>%
   filter(Sentiment == "negative" & Count > 0) %>%
@@ -234,15 +232,15 @@ consistently_negative <- product_sentiment %>%
 # Display top 1000 ProductIDs with the highest negative reviews
 datatable(
   consistently_negative[1:1000,],
-  options = list(pageLength = 10),
+  options = list(pageLength = 10, scrollx = '10in', scrollY = '4in'),
   caption = "First 1000 rows of ProductIDs with highest negative reviews.",
-   fillContainer = T)
+   fillContainer = TRUE)
 ```
 
 The first table shows the list of products that have high number of positive reviews, while the second table shows the products with the highest number of 
 negative reviews.
 
-## 4. Do certain review lengths tend to have more positive or negative sentiment?
+### 4. Do certain review lengths tend to have more positive or negative sentiment?
 
 ```{r, sent_analysis4, message=FALSE, warning=FALSE}
 # Calculate the review lengths
@@ -268,7 +266,7 @@ ggplot(review_length_sentiment, aes(x = ReviewLength,
 
 Negative reviews tend to be shorter than positive reviews, while neutral reviews tend to be long. It also emphasizes that there are more positive reviews then negative reviews in the data set.
 
-## 5. How does the sentiment differ between different user ratings?
+### 5. How does the sentiment differ between different user ratings?
 
 ```{r, sent_analysis5, message=FALSE, warning=FALSE}
 # Group reviews by user rating to calculate sentiment distribution
@@ -293,7 +291,7 @@ ggplot(rating_sentiment, aes(x = as.factor(Score), y = Count, fill = Sentiment))
 Customers are generous with ratings when they are happy. Positive reviews 
 will most likely receive a 5-star and negative reviews a 1-star.
 
-# Conclusion
+## Conclusion
 
 1. The lack of sales data for each product, which could have been used
 to  calculate the sentiment-to-sales ratio for each product. This ratio would provide insights into how positively the products are perceived by customers relative to their sales performance.
