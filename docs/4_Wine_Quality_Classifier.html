@@ -365,7 +365,7 @@ div.tocify {
   <a href="3_churn.html">Telco Churn Analysis</a>
 </li>
 <li>
-  <a href="4_Wine-Quality-Classifier.html">Wine Quality Classifier</a>
+  <a href="4_Wine_Quality_Classifier.html">Wine Quality Classifier</a>
 </li>
 <li>
   <a href="5_Airline_Delay_Prediction.html">Airline Delay Prediction</a>
@@ -394,6 +394,12 @@ div.tocify {
 </div>
 
 
+<div
+id="the-task-is-to-build-a-model-that-can-predict-wine-quality-based-on-the-wine-physicochemical-and-sensory-data."
+class="section level3">
+<h3>The task is to build a model that can predict wine quality based on
+the wine physicochemical and sensory data.</h3>
+</div>
 <div id="wine-quality-dataset" class="section level2">
 <h2>Wine Quality Dataset</h2>
 <p>The dataset consists of physicochemical (inputs) and sensory (the
@@ -585,10 +591,10 @@ d12 &lt;- ggplot(wine_data, aes(x = quality)) +
              x = &quot;Quality&quot;, y = &quot;Count&quot;)
 # Print charts
 grid.arrange(d1, d2, d3, d4, d5, d6, ncol = 2)</code></pre>
-<p><img src="4_Wine-Quality-Classifier_files/figure-html/data_dist-1.png" width="960" /></p>
+<p><img src="4_Wine_Quality_Classifier_files/figure-html/data_dist-1.png" width="960" /></p>
 <pre class="r"><code>grid.arrange(d7, d8, d9, d10, d11, d12, 
              ncol = 2)</code></pre>
-<p><img src="4_Wine-Quality-Classifier_files/figure-html/data_dist-2.png" width="960" /></p>
+<p><img src="4_Wine_Quality_Classifier_files/figure-html/data_dist-2.png" width="960" /></p>
 </div>
 </div>
 <div id="classification-modeling" class="section level2">
@@ -601,7 +607,7 @@ cor_matrix &lt;- cor(wine_data)
 corrplot(cor_matrix, 
          method = &quot;color&quot;,
          addCoef.col = &quot;black&quot;, tl.col = &quot;red&quot;)</code></pre>
-<p><img src="4_Wine-Quality-Classifier_files/figure-html/corr_mat-1.png" width="960" /></p>
+<p><img src="4_Wine_Quality_Classifier_files/figure-html/corr_mat-1.png" width="960" /></p>
 <p>Notice that ‘quality’ has very low correlations with some of the
 variables. This doesn’t necessarily imply that ‘quality’ has no
 relationship with those variables, but those relationships maybe

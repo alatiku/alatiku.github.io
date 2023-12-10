@@ -365,7 +365,7 @@ div.tocify {
   <a href="3_churn.html">Telco Churn Analysis</a>
 </li>
 <li>
-  <a href="4_Wine-Quality-Classifier.html">Wine Quality Classifier</a>
+  <a href="4_Wine_Quality_Classifier.html">Wine Quality Classifier</a>
 </li>
 <li>
   <a href="5_Airline_Delay_Prediction.html">Airline Delay Prediction</a>
@@ -395,8 +395,8 @@ churn on the IBM dataset</h1>
 </div>
 
 
-<div id="analysis-objectives" class="section level1">
-<h1>Analysis Objectives</h1>
+<div id="analysis-objectives" class="section level2">
+<h2>Analysis Objectives</h2>
 <p>The purpose of this analysis is to answer 5 business questions using
 the Telco Customer Churn - IBM Dataset.</p>
 <ol style="list-style-type: decimal">
@@ -410,6 +410,7 @@ churn rates?</p></li>
 <li><p>Can we predict which customers are likely to churn in the near
 future?</p></li>
 </ol>
+</div>
 <div id="telco-customer-churn-ibm-dataset" class="section level2">
 <h2>Telco Customer Churn: IBM Dataset</h2>
 <p>The data is from a fictional telco company that provided home phone
@@ -802,7 +803,7 @@ class="section level3">
 churn?</h3>
 <p>To do that, the data needs to only include churned customers, then
 further analysis could identify which factors are unique to them.
-Specifically, we look at those variable that are high on the random
+Specifically, we look at those variables that are high on the random
 forest model.</p>
 <pre class="r"><code># Create a subset of data for customers who churned
 churned_customers &lt;- telco_cleaned %&gt;%
@@ -1244,7 +1245,6 @@ customers to include not only reasons for leaving, but also customer
 satisfaction ratings on services can provide insights into why they
 left, to guide strategies to address common pain points.</p></li>
 </ol>
-</div>
 </div>
 
 

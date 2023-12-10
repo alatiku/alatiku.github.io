@@ -12,9 +12,9 @@ output:
     code_folding: hide
 ---
 
-### This capstone project is for the Google Data Analytics course.
+##### This is a capstone project for the Google Data Analytics course. After dedicatting a year refining my R skills through immersive courses, notably on DataCamp. In July 2023, I revisited the Cyclistic project to apply my enhanced abilities.
 
-#### After dedicatting a year refining my R skills through immersive courses, notably on DataCamp. In July 2023, I revisited the Cyclistic project to apply my enhanced abilities.
+## Introduction
 
 This case study focuses on analyzing the bike-share program of Cyclistic, a
 company in Chicago, with the goal of understanding the differences between

@@ -12,6 +12,8 @@ output:
     code_folding: hide
 ---
 
+### The task is to build a model that can predict wine quality based on the wine physicochemical and sensory data.
+
 ## Wine Quality Dataset
 
 The dataset consists of physicochemical (inputs) and sensory (the output) variables for two datasets, the red and white variants of the Portuguese "Vinho Verde" wine. The two data sets could be used for the analysis, but only one at a time.

@@ -11,7 +11,7 @@ output:
     toc_depth: 2
     code_folding: hide
 ---
-# Analysis Objectives
+## Analysis Objectives
 
 The purpose of this analysis is to answer 5 business questions using the Telco
 Customer Churn - IBM Dataset.
@@ -282,7 +282,7 @@ predictors that strongly influence customer churn.
 
 ### 2. Can we identify patterns or behaviors that precede customer churn?
 
-To do that, the data needs to only include churned customers, then further analysis could identify which factors are unique to them. Specifically, we look at those variable that are high on the random forest model.
+To do that, the data needs to only include churned customers, then further analysis could identify which factors are unique to them. Specifically, we look at those variables that are high on the random forest model.
 
 ```{r churn_distribution, fig.height=10, fig.width=10, warning=FALSE, message=FALSE}
 # Create a subset of data for customers who churned

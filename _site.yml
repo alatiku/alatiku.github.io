@@ -17,7 +17,7 @@ navbar:
     - text: "Telco Churn Analysis"
       href: 3_churn.html
     - text: "Wine Quality Classifier"
-      href: 4_Wine-Quality-Classifier.html
+      href: 4_Wine_Quality_Classifier.html
     - text: "Airline Delay Prediction"
       href: 5_Airline_Delay_Prediction.html
 output_dir: "docs"
