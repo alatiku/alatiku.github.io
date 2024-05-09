@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Data Science Portfolio</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="assets/images/icon-portfolio.svg" type="image/x-icon">
+
+  <!-- Custom CSS link -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Google font link -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+  <!-- #MAIN -->
+  <main>
+
+    <!-- #SIDEBAR -->
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+        <figure class="avatar-box">
+          <img src="assets/images/my-avatar.jpg" alt="Pic" width="80">
+        </figure>
+        <div class="info-content">
+          <h1 class="name" title="Aliyu Atiku Mustapha">Aliyu Atiku Mustapha</h1>
+          <p class="title">Data Scientist</p>
+        </div>
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+
+      <div class="sidebar-info_more">
+        <div class="separator"></div>
+        <ul class="contacts-list">
+          <li class="contact-item">
+            <div class="icon-box">
+              <i class="fas fa-map-marker-alt" style="color: #ffcc66;"></i>
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Lagos, Nigeria.</address>
+            </div>
+          </li>
+        </ul>
+        <div class="separator"></div>
+        <ul class="social-list">
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/aliyu-atiku" class="social-link">
+              <i class="fab fa-linkedin" style="color: #ffcc66;"></i>
+            </a>
+          </li>
+		  <li class="social-item">
+            <a href="https://github.com/alatiku" class="social-link">
+              <i class="fab fa-github" style="color: #ffcc66;"></i>
+            </a>
+          </li>
+          <!-- Kaggle Icon
+          <li class="social-item">
+            <a href="https://www.kaggle.com/alatiku" class="social-link">
+              <i class="fab fa-kaggle" style="color: #ffcc66;"></i>
+            </a>
+          </li> 
+          -->
+        </ul>
+      </div>
+    </aside>
+
+    <!-- #main-content -->
+    <div class="main-content">
+
+      <!-- #NAVBAR -->
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>About Me</button>
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Projects</button>
+          </li>
+          <!--<li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Blog</button>
+          </li> -->
+        </ul>
+      </nav>
+
+    <!-- #ABOUT -->
+      <article class="about active" data-page="about me">
+        <header>
+          <h2 class="h2 article-title">About Me</h2>
+        </header>
+        <section class="about-text">
+          <p>
+            Welcome to my portfolio website! I'm a data-driven Business Operations Manager turned Data Scientist.
+          </p>
+          <p>
+           My interest in data science was sparked working in the commodity import/export industry, where I saw first hand 
+           how important data is to comprehending market trends, patterns, and pricing. This inspired me to go even more 
+           deeply into the world of data by taking the Google Data Analytics course, later enrolling into SQL, R and 
+           Python data science specialization courses.
+          </p>
+          <p>
+            My main objective is to apply my growing skills in data manipulation (wrangling and cleaning), analysis, and
+            visualization, hypothesis testing, A/B testing, and machine learning algorithms to uncover insightful information,
+            identify trends, and solve complex business problems. 
+          </p>
+          <p>
+           Thank you for visiting!
+           </p>
+        </section>
+        <!-- service -->
+        <section class="service">
+          <h3 class="h3 service-title">Skills</h3>
+          <ul class="service-list">
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="assets/images/icon-database-solid.svg" alt="sql icon" width="30">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">SQL</h4>
+                <p class="service-item-text">
+                   For effective data retrieval, manipulation, preparation, storage and managing large datasets.
+                </p>
+              </div>
+            </li>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="assets/images/icon-python.svg" alt="python icon" width="30">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Python</h4>
+                <p class="service-item-text">
+                  For its versatility, extensive libraries, and ease of use in data manipulation, analysis, 
+                  visualization, machine learning and big data.
+                </p>
+              </div>
+            </li>
+  			<li class="service-item">
+                <div class="service-icon-box">
+                  <img src="assets/images/icon-r-solid.svg" alt="r icon" width="30">
+                </div>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">R</h4>
+                  <p class="service-item-text">
+                    For statistical computing, data analysis and its powerful visualization capabilities through
+                    extensive libraries and community support.
+                  </p>
+                </div>
+              </li>
+  			<li class="service-item">
+                <div class="service-icon-box">
+                  <img src="assets/images/icon-chart.svg" alt="powerbi icon" width="30">
+                </div>
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">Power BI</h4>
+                  <p class="service-item-text">
+                    For its user-friendly interface, extensive data visualization and robust business intelligence
+                    capabilities.
+                  </p>
+                </div>
+              </li>
+             <!--
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="assets/images/icon-docker.svg" alt="docker icon" width="30">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Docker</h4>
+                <p class="service-item-text">
+                  For its containerization technology, streamlining the deployment and management of data science 
+                  applications and environments.
+                </p>
+              </div>
+            </li>
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="assets/images/icon-scala.svg" alt="scala icon" width="30">
+              </div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Scala</h4>
+                <p class="service-item-text">
+                 For scalability and compatibility with big data frameworks like Apache Spark, enabling efficient 
+                 processing and analysis of large datasets..
+                </p>
+              </div>
+            </li>
+           </ul>  -->
+        </section>
+		      <p>
+           <a href="https://github.com/codewithsadee/vcard-personal-portfolio">Original template.</a>
+          </p>
+      </article>
+
+      <!-- #Projects -->
+      <article class="projects" data-page="projects">
+        <header>
+    		<h2 class="h2 article-title">Project List</h2>
+            </header>
+    		<section class="about-text">
+            </section>
+    		<section class="about-text">
+          <p>
+            Browse my portfolio showcasing diverse data science projects in R and Python, highlighting expertise in 
+            data analysis, manipulation, visualization, identifying trends or patterns and machine learning. These 
+            projects vividly demonstrate my adeptness in employing a wide range of data science techniques.
+          </p>
+        </section>
+        <section class="projects-posts">
+          <ul class="projects-posts-list">
+            <li class="projects-post-item">
+              <a href="Projects/Sentiment_Analysis.html" target="_blank">
+                <figure class="projects-banner-box">
+                  <img src="assets/images/blog-1.jpg" alt="Project Number 1" width="601" height="401" loading="lazy">
+                </figure>
+                <div class="projects-content">
+                  <div class="projects-meta">
+                    <p class="projects-category">R</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-05-09">2024-05-09</time>
+                  </div>
+                  <h3 class="h3 projects-item-title">Review Sentiment Analysis</h3>
+                  <p class="projects-text">
+                    Sentiment Analysis on Amazon Fine Food Reviews Data.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="projects-post-item">
+              <a href="Projects/Telcom_Customer_Churn_Prediction.html" target="_blank">
+                <figure class="projects-banner-box">
+                  <img src="assets/images/blog-2.jpg" alt="Project Number 2" width="601" height="401" loading="lazy">
+                </figure>
+                <div class="projects-content">
+                  <div class="projects-meta">
+                    <p class="projects-category">R</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-05-09">2024-05-09</time>
+                  </div>
+                  <h3 class="h3 projects-item-title">Customer Churn Analysis</h3>
+                  <p class="projects-text">
+                    Churn Analysis and prediction on IBM Telco Customer Data.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <!--<li class="projects-post-item">
+              <a href="#">
+                <figure class="projects-banner-box">
+                  <img src="assets/images/blog-3.jpg" alt="Project Number 2" width="601" height="401" loading="lazy">
+                </figure>
+                <div class="projects-content">
+                  <div class="projects-meta">
+                    <p class="projects-category">Python</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">Feb 23, 2024</time>
+                  </div>
+                  <h3 class="h3 projects-item-title">Project Number 3</h3>
+                  <p class="projects-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="projects-post-item">
+              <a href="#">
+                <figure class="projects-banner-box">
+                  <img src="assets/images/blog-4.jpg" alt="Project Number 2" width="601" height="401" loading="lazy">
+                </figure>
+                <div class="projects-content">
+                  <div class="projects-meta">
+                    <p class="projects-category">Python</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">Feb 23, 2024</time>
+                  </div>
+                  <h3 class="h3 projects-item-title">Project Number 4</h3>
+                  <p class="projects-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="projects-post-item">
+              <a href="#">
+                <figure class="projects-banner-box">
+                  <img src="assets/images/blog-5.jpg" alt="Project Number 2" width="601" height="401" loading="lazy">
+                </figure>
+                <div class="projects-content">
+                  <div class="projects-meta">
+                    <p class="projects-category">R</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">Feb 23, 2024</time>
+                  </div>
+                  <h3 class="h3 projects-item-title">Project Number 5</h3>
+                  <p class="projects-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="projects-post-item">
+              <a href="#">
+                <figure class="projects-banner-box">
+                  <img src="assets/images/blog-6.jpg" alt="Project Number 2" width="601" height="401" loading="lazy">
+                </figure>
+                <div class="projects-content">
+                  <div class="projects-meta">
+                    <p class="projects-category">Python</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">Feb 23, 2024</time>
+                  </div>
+                  <h3 class="h3 projects-item-title">Project Number 6</h3>
+                  <p class="projects-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li> -->
+          </ul>
+        </section>
+      </article>
+
+      <!-- #Blog -->
+      <article class="blog" data-page="blog">
+        <header>
+        <h2 class="h2 article-title">Blog </h2>
+            </header>
+        <section class="about-text">
+            </section>
+        <section class="blogs-posts">
+          <ul class="blogs-posts-list">
+            <li class="blogs-post-item">
+              <a href="#">
+                <div class="blogs-content">
+                  <h3 class="h3 blogs-item-title">Blog 1</h3>
+                  <div class="blogs-meta">
+                    <p class="blogs-category">R</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">June 23, 2024</time>
+                  </div>
+                  <p class="blogs-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="blogs-post-item">
+              <a href="#">
+                <div class="blogs-content">
+                  <h3 class="h3 blogs-item-title">Blog 2</h3>
+                  <div class="blogs-meta">
+                    <p class="blogs-category">Python</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">July 23, 2024</time>
+                  </div>
+                  <p class="blogs-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="blogs-post-item">
+              <a href="#">
+                <div class="blogs-content">
+                  <h3 class="h3 blogs-item-title">Blog 3</h3>
+                   <div class="blogs-meta">
+                    <p class="blogs-category">R</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">Feb 23, 2024</time>
+                  </div>
+                  <p class="blogs-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="blogs-post-item">
+              <a href="#">
+                <div class="blogs-content">
+                  <h3 class="h3 blogs-item-title">Blog 4</h3>
+                  <div class="blogs-meta">
+                    <p class="blogs-category">Python</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">August 23, 2024</time>
+                  </div>
+                  <p class="blogs-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="blogs-post-item">
+              <a href="#">
+                <div class="blogs-content">
+                  <h3 class="h3 blogs-item-title">Blog 5</h3>
+                  <div class="blogs-meta">
+                    <p class="blogs-category">R</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">September 23, 2024</time>
+                  </div>
+                  <p class="blogs-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+            <li class="blogs-post-item">
+              <a href="#">
+                <div class="blogs-content">
+                  <h3 class="h3 blogs-item-title">Blog 6</h3>
+                  <div class="blogs-meta">
+                    <p class="blogs-category">Python</p>
+                    <span class="dot"></span>
+                    <time datetime="2024-02-23">October 23, 2024</time>
+                  </div>
+                  <p class="blogs-text">
+                    Project description and data used.
+                  </p>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- Custom JS link -->
+  <script src="assets/js/script.js"></script>
+
+</body>
+</html>

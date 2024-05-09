@@ -1,0 +1,5 @@
+"0","# Correlation matrix"
+"0","cor_matrix <- cor(cc_data)"
+"0","corrplot(cor_matrix, "
+"0","         method = ""color"","
+"0","         addCoef.col = ""black"", tl.col = ""red"")"
